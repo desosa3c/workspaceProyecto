@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>eMercado - Todo lo que busques está aquí</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
+      rel="stylesheet"
+    />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/stylesLogin.css" rel="stylesheet" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <main class="mt-5">
+      <div class="container-form register">
+        <div class="information">
+          <div class="info-childs">
+            <h2>Bienvenido</h2>
+            <p>Para comprar o vender por favor inicia sesión con tus datos</p>
+            <input type="button" value="Iniciar sesión" id="sing-in" />
+          </div>
+        </div>
+        <div class="form-information">
+          <div class="form-information-childs">
+            <h2>Crear una cuenta</h2>
+
+            <p>Usa tu email para registrarte</p>
+            <form class="form">
+              <label>
+                <i class="bx bx-user"></i>
+                <input type="text" placeholder="Nombre de usuario" id="userName"/>
+              </label>
+              <label>
+                <i class="bx bx-envelope"></i>
+                <input type="email" placeholder="Correo" id="userEmail"/>
+              </label>
+              <label>
+                <i class="bx bx-lock-alt"></i>
+                <input type="password" placeholder="Contraseña" id="passRegister1"/>
+                
+              </label>
+              <label>
+                <i class="bx bx-lock-alt"></i>
+                <input type="password" placeholder="Repita la contraseña" id="passRegister2"/>
+                
+              </label>
+              <p>*Minimo 6 caracteres</p>
+              <div class="icons">
+                <i class="bx bxl-google"></i>
+                <p>O registrarse con Google</p>
+
+              </div>
+              <input type="submit" value="Registrarse" id="btnRegister"/>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-form login hide">
+        <div class="information">
+          <div class="info-childs">
+            <h2>Bienvenido nuevamente!</h2>
+            <p>Si aún no estas registrado puedes registrarte aquí</p>
+            <input type="button" value="Registrarse" id="sing-up" />
+          </div>
+        </div>
+        <div class="form-information">
+          <div class="form-information-childs">
+            <h2>Iniciar sesión</h2>
+
+            <p>Ingresa tus datos</p>
+            <form class="form">
+              <label>
+                <i class="bx bx-envelope"></i>
+                <input type="email" placeholder="Correo" id="email" />
+              </label>
+              <label>
+                <i class="bx bx-lock-alt"></i>
+                <input type="password" placeholder="Contraseña" id="passLogin"/>
+              </label>
+              <div class="icons">
+                <i class="bx bxl-google"></i>
+                <p>O inicia sesión con Google</p>
+              </div>
+              <input type="submit" value="Iniciar sesión" id="btnLogin"/>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      </div>
+    </main>
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-end">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p>
+          Este sitio forma parte de
+          <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
+            >Jovenes a Programar</a
+          >
+        </p>
+      </div>
+    </footer>
+    <script  src="js/login.js"></script>
+  </body>
+</html>
