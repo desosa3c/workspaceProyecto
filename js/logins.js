@@ -1,3 +1,6 @@
+
+
+/*
 window.addEventListener('DOMContentLoaded', () => {
 
     const infoLoginBtn = document.getElementById('sing-in')
@@ -17,3 +20,5 @@ window.addEventListener('DOMContentLoaded', () => {
         infoRegistroContainer.classList.toggle('hide')
     })
 })
+
+*/
