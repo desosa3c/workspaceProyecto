@@ -53,9 +53,16 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+    <div class="row" style="position: relative; right: 200px;">
+      <div class="col-lg-7 offset-lg-6 col-md-12 mb-1 container">
         <div class="row container p-0 m-0">
+          
+          <div class="col">
+            <div class="col" style="display: flex; flex-direction: row;">
+              <label for="searchPrice" class="input-group-text" style="background-color: rgba(245, 245, 245, 0); border: none;">Buscar</label>
+              <input class="form-control" type="search" placeholder="Buscar producto" id="searchInput" style="width: 200px;">
+            </div>
+          </div>
           <div class="col">
             <p class="font-weight-normal text-end my-2">Precio</p>
           </div>
@@ -65,11 +72,14 @@
           <div class="col">
             <input class="form-control" type="number" placeholder="máx." id="rangeFilterPriceMax">
           </div>
-          <div class="col-3 p-0">
+          
+          
+          <div class="col-1 p-0">
             <div class="btn-group" role="group">
               <button class="btn btn-light btn-block" id="filterPrice">Filtrar</button>
               <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
             </div>
+                     
           </div>
         </div>
       </div>
