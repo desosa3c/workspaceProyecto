@@ -141,3 +141,12 @@ document.addEventListener("DOMContentLoaded", function(e){
         showCategoriesList();
     });
 });
+
+// const bot_fil = document.getElementById("rangeFilterCount");
+
+// bot_fil.addEventListener("click", () => {
+//     const bot_min = document.getElementById("rangeFilterCountMin").value;
+//     const bot_max = document.getElementById("rangeFilterCountMax").value;
+
+//     if()
+// });
