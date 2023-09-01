@@ -153,8 +153,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
     showProductsList(filteredArray);
   });
 
-  // Resto de tu código...
   
-  // ...
   
 });
