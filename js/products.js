@@ -127,3 +127,34 @@ document.addEventListener("DOMContentLoaded", function (e) {
   });
 
 });
+
+document.addEventListener("DOMContentLoaded", function (e) {
+  getJSONData(productsUrl).then(function (response) {
+    if (response.status === "ok") {
+      currentProductsArray = response.data.products;
+      showProductsList(currentProductsArray);
+    }
+  });
+
+  // Obtén el elemento de búsqueda por su ID
+  const searchInput = document.getElementById("searchInput");
+
+  // Agrega un evento input al campo de búsqueda
+  searchInput.addEventListener("input", function () {
+    const searchText = this.value.toLowerCase();
+    const filteredArray = currentProductsArray.filter((product) => {
+      // Filtra productos por título y descripción
+      const title = product.name.toLowerCase();
+      const description = product.description.toLowerCase();
+      return title.includes(searchText) || description.includes(searchText);
+    });
+
+    // Muestra la lista filtrada
+    showProductsList(filteredArray);
+  });
+
+  // Resto de tu código...
+  
+  // ...
+  
+});
