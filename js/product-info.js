@@ -1,10 +1,8 @@
 
 
-//const productComentURL = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
 
 
 function setProductID(id) {
-    alert('ahoy');
     localStorage.setItem('selectedProductID', id);
     window.location.href = 'product-info.html';
 }
@@ -50,6 +48,52 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 let product = response.data;
                 showProductInfo(product);
             }
-        })
+        })   
+        const productCommentURL = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
+        
+        
 
-});
+        function productComments(comment) {
+          const card = document.createElement("div");
+          card.className = "col-md-6"
+          card.innerHTML = `
+              <div class="card-body">
+                <p>
+                Usuario: ${comment.user}
+                Fecha: ${comment.dateTime}
+                Puntuación: ${comment.score}
+                Comentario: ${comment.description}</p>
+              </div>
+            </div>
+            `;
+          return card;
+      }
+
+
+      fetch(productCommentURL)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error al cargar los comentarios: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(comments => {
+        const commentsContainer = document.getElementById('containerComments');
+        comments.forEach(comment => {
+          const commentElement = productComments(comment); 
+          commentsContainer.appendChild(commentElement); 
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+      const enviar = document.getElementById("newComment");
+      const comentario = document.getElementById("Comentario");
+      const puntuacion = document.getElementById("puntuacion");
+
+     enviar.addEventListener("click", function() {
+        alert("anda")
+        comentario.value = " "; 
+     })
+})

@@ -41,11 +41,31 @@
     </div>
   </nav>
   <main>
-    <div class="container" id="containerInfo">
-      
+    <div class="container" id="containerInfo">   
     </div>
-    
+    <div class="container" id="containerComments">
+      <h4>Comentarios</h4>
+    </div>
+    <div class="container" id="containerNewComment">
+      <h4>Comentar</h4>
+      <label for="Comments">Tu opinion:</label>
+        <textarea id="Comentario" name="Comentario"></textarea>
+        <br>
+      <label for="score">Tu puntuación:</label>
+        <select id="puntuacion" name="puntuacion">
+                <option value="" hidden selected disabled>-- Elige una puntuación --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>                    
+                <option value="4">4</option>
+                <option value="4">5</option>
+        </select>
+        <br>
+        <input type="submit" value="Enviar" id="newComment">
+    </div>
   </main>
+
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
