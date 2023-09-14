@@ -1,6 +1,25 @@
+const comentariosContainer = document.getElementById("containerComments");
 
+function agregarcomentario(punt, coment){
+    let infoUser = JSON.parse(localStorage.getItem('userData'));
+    let userName = infoUser.user.userName;
 
-
+    const comentarioDiv = document.createElement('div');
+    comentarioDiv.className = "col-md-6"
+    comentarioDiv.innerHTML = `
+              <div class="card-body">
+                <p>
+                Usuario: ${userName}
+                Fecha: ${new Date().toLocaleString()}
+                Puntuación: ${punt}
+                Comentario: ${coment}</p>
+              </div>
+            `;
+      
+    comentariosContainer.appendChild(comentarioDiv);
+    document.getElementById('puntuacion').value = '';
+    document.getElementById('Comentario').value = '';
+};
 
 function setProductID(id) {
     localStorage.setItem('selectedProductID', id);
@@ -64,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 Puntuación: ${comment.score}
                 Comentario: ${comment.description}</p>
               </div>
-            </div>
             `;
           return card;
       }
@@ -89,11 +107,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
       });
 
       const enviar = document.getElementById("newComment");
-      const comentario = document.getElementById("Comentario");
-      const puntuacion = document.getElementById("puntuacion");
 
      enviar.addEventListener("click", function() {
-        alert("anda")
-        comentario.value = " "; 
-     })
-})
+      let comentario = document.getElementById("Comentario").value;
+      let puntuacion = document.getElementById("puntuacion").value;
+      agregarcomentario(puntuacion,comentario);
+     });
+});
