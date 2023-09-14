@@ -1,5 +1,14 @@
 const comentariosContainer = document.getElementById("containerComments");
 
+function generarEstrellas(puntuacion) {
+  const maxPuntuacion = 5;
+  const estrellaLlena = `<span class="fa fa-star checked"></span>`;
+  const estrellaVacia = `<span class="fa fa-star"></span>`;
+  let estrellasLlenas = estrellaLlena.repeat(puntuacion);
+  let estrellasVacias = estrellaVacia.repeat(maxPuntuacion - puntuacion);
+  return estrellasLlenas + estrellasVacias;
+};
+
 function agregarcomentario(punt, coment){
     let infoUser = JSON.parse(localStorage.getItem('userData'));
     let userName = infoUser.user.userName;
@@ -11,13 +20,14 @@ function agregarcomentario(punt, coment){
                 <p>
                 Usuario: ${userName}
                 Fecha: ${new Date().toLocaleString()}
-                Puntuación: ${punt}
+                <br>
+                Puntuación: ${generarEstrellas(punt)}
+                <br>
                 Comentario: ${coment}</p>
               </div>
             `;
       
     comentariosContainer.appendChild(comentarioDiv);
-    document.getElementById('puntuacion').value = '';
     document.getElementById('Comentario').value = '';
 };
 
@@ -80,7 +90,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 <p>
                 Usuario: ${comment.user}
                 Fecha: ${comment.dateTime}
-                Puntuación: ${comment.score}
+                <br>
+                Puntuación: ${generarEstrellas(comment.score)}
+                <br>
                 Comentario: ${comment.description}</p>
               </div>
             `;
@@ -105,12 +117,43 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch(error => {
         console.error(error);
       });
+      
+      function handleStarClick(score) {
+        // Agrega la clase "checked" a la estrella clicada y a las anteriores
+        stars.forEach((s, index) => {
+          if (index < score) {
+            s.classList.add("checked");
+          } else {
+            s.classList.remove("checked");
+          }
+        }); 
+      }
+      
+      const stars = document.querySelectorAll(".fa-star");
+      stars.forEach((star) => {
+        star.addEventListener("click", () => {
+          const score = parseInt(star.getAttribute("data-score"));
+          handleStarClick(score);
+        });
+      });
 
-      const enviar = document.getElementById("newComment");
+      function cantidadestrellas() {
+        let count = 0;
+        stars.forEach((star) => {
+          if (star.classList.contains("checked")) {
+            count++;
+          }
+        });
+        return count;
+      }
 
-     enviar.addEventListener("click", function() {
-      let comentario = document.getElementById("Comentario").value;
-      let puntuacion = document.getElementById("puntuacion").value;
-      agregarcomentario(puntuacion,comentario);
-     });
+      newComment.addEventListener("click",() =>{
+        let comentario = document.getElementById("Comentario").value;
+        const starsSelected = cantidadestrellas();
+        if(comentario.trim() === ''){
+          alert("Por favor introduzca un comentario")
+        }else{
+        agregarcomentario(starsSelected,comentario);
+        }
+      });
 });

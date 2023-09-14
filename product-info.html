@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
-
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>eMercado - Todo lo que busques está aquí</title>
+    
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link
+    href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+    rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -49,23 +50,22 @@
     <div class="container" id="containerNewComment">
       <h4>Comentar</h4>
       <label for="Comments">Tu opinion:</label>
-        <textarea id="Comentario" name="Comentario"></textarea>
+      <br>  
+      <textarea id="Comentario" name="Comentario"></textarea>
         <br>
       <label for="score">Tu puntuación:</label>
-        <select id="puntuacion" name="puntuacion">
-                <option value="" hidden selected disabled>-- Elige una puntuación --</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>                    
-                <option value="4">4</option>
-                <option value="5">5</option>
-        </select>
+              
+      <span class="fa fa-star" data-score="1"></span>
+      <span class="fa fa-star" data-score="2"></span>
+      <span class="fa fa-star" data-score="3"></span>
+      <span class="fa fa-star" data-score="4"></span>
+      <span class="fa fa-star" data-score="5"></span>
         <br>
-        <input type="submit" value="Enviar" id="newComment">
+        <input class="btn btn-primary" type="submit" value="Enviar" id="newComment">
     </div>
+      
   </main>
-
-
+  
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -87,5 +87,4 @@
   <script src="js/product-info.js"></script>
   <script src="js/products.js"></script>
 </body>
-
 </html>
