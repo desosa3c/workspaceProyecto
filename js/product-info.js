@@ -9,28 +9,6 @@ function generarEstrellas(puntuacion) {
   return estrellasLlenas + estrellasVacias;
 };
 
-function agregarcomentario(punt, coment){
-    let infoUser = JSON.parse(localStorage.getItem('userData'));
-    let userName = infoUser.user.userName;
-
-    const comentarioDiv = document.createElement('div');
-    comentarioDiv.className = "col-md-6"
-    comentarioDiv.innerHTML = `
-              <div class="card-body">
-                <p>
-                Usuario: ${userName}
-                Fecha: ${new Date().toLocaleString()}
-                <br>
-                Puntuación: ${generarEstrellas(punt)}
-                <br>
-                Comentario: ${coment}</p>
-              </div>
-            `;
-      
-    comentariosContainer.appendChild(comentarioDiv);
-    document.getElementById('Comentario').value = '';
-};
-
 function setProductID(id) {
     localStorage.setItem('selectedProductID', id);
     window.location.href = 'product-info.html';
@@ -128,6 +106,29 @@ document.addEventListener("DOMContentLoaded", function (e) {
           }
         }); 
       }
+
+      function agregarcomentario(punt, coment){
+        let infoUser = JSON.parse(localStorage.getItem('userData'));
+        let userName = infoUser.user.userName;
+    
+        const comentarioDiv = document.createElement('div');
+        comentarioDiv.className = "col-md-6"
+        comentarioDiv.innerHTML = `
+                  <div class="card-body">
+                    <p>
+                    Usuario: ${userName}
+                    Fecha: ${new Date().toLocaleString()}
+                    <br>
+                    Puntuación: ${generarEstrellas(punt)}
+                    <br>
+                    Comentario: ${coment}</p>
+                  </div>
+                `;
+          
+        comentariosContainer.appendChild(comentarioDiv);
+        document.getElementById('Comentario').value = '';
+        handleStarClick(0);
+    };
       
       const stars = document.querySelectorAll(".fa-star");
       stars.forEach((star) => {
@@ -145,13 +146,17 @@ document.addEventListener("DOMContentLoaded", function (e) {
           }
         });
         return count;
-      }
+      };
 
       newComment.addEventListener("click",() =>{
         let comentario = document.getElementById("Comentario").value;
         const starsSelected = cantidadestrellas();
-        if(comentario.trim() === ''){
+        if(comentario.trim() === '' && starsSelected==0){
+          alert("Por favor introduzca un comentario y una puntuacion")
+        }else if(comentario.trim() === ''){
           alert("Por favor introduzca un comentario")
+        }else if(starsSelected == 0){
+          alert("Por favor introduzca una puntuacion")
         }else{
         agregarcomentario(starsSelected,comentario);
         }
