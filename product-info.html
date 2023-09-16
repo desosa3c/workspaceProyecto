@@ -35,33 +35,39 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item" id="perfil">
+          <li class="nav-item btnNav" id="perfil">
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <main>
-    <div class="container" id="containerInfo">   
+  <main class="container">
+    <div class="row" id="containerInfo">
     </div>
-    <div class="container" id="containerComments">
-      <h4>Comentarios</h4>
+    <div id="containerComments" class="row mt-5">
+      <h1>Comentarios</h1>
     </div>
-    <div class="container" id="containerNewComment">
+    <div id="containerNewComment" class="row">
       <h4>Comentar</h4>
       <label for="Comments">Tu opinion:</label>
       <br>  
-      <textarea id="Comentario" name="Comentario"></textarea>
+      <textarea id="Comentario" name="Comentario" cols="100" rows="5"></textarea>
         <br>
-      <label for="score">Tu puntuación:</label>
-              
-      <span class="fa fa-star" data-score="1"></span>
-      <span class="fa fa-star" data-score="2"></span>
-      <span class="fa fa-star" data-score="3"></span>
-      <span class="fa fa-star" data-score="4"></span>
-      <span class="fa fa-star" data-score="5"></span>
-        <br>
-        <input class="btn btn-primary" type="submit" value="Enviar" id="newComment">
+      
+      <div class="row justify-content-between mt-3">
+        <div class="col-4">
+          <label for="score">Tu puntuación:</label>
+          <span class="fa fa-star" data-score="1"></span>
+          <span class="fa fa-star" data-score="2"></span>
+          <span class="fa fa-star" data-score="3"></span>
+          <span class="fa fa-star" data-score="4"></span>
+          <span class="fa fa-star" data-score="5"></span>
+        </div>
+        <div class="col-4 text-end">
+          <input class="btn btn-primary" type="submit" value="Enviar" id="newComment">
+        </div>
+      </div>
+
     </div>
       
   </main>
@@ -85,6 +91,6 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
-  <script src="js/products.js"></script>
+  
 </body>
 </html>

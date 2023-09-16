@@ -32,6 +32,11 @@ function productCard(p) {
   return card;
 }
 
+function setProductID(id) {
+  localStorage.setItem('selectedProductID', id);
+  window.location.href = 'product-info.html';
+}
+
 function sortProducts(array) {
   let result = [];
   if (currentSortCriteria === ORDER_ASC) {
