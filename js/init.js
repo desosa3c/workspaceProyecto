@@ -50,8 +50,14 @@ let checkUser = function () {
     //Agrego un enlace para acceder al perfil 'userName'
     let userName = infoUser.user.userName;
     let perfil = document.getElementById('perfil');
-    perfil.innerHTML = '<a class="nav-link" href="my-profile.html">' + userName + '<i class="bx bx-user"></i></a>';
+    
+    perfil.innerHTML = '<div class="dropdown"><a class="btn btn-secondary dropdown-toggle" href="my-profile.html" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">'
+     + userName + '</a><ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"><li><a class="dropdown-item" href="cart.html">Mi carrito</a></li><li><a class="dropdown-item" href="my-profile.html">Mi Perfil</a></li><li><a class="dropdown-item" href="login.html">Cerrar sesión</a></li></ul></div>'
+  
   }
+
+
+
 };
 checkUser();
 
