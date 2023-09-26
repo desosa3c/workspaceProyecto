@@ -15,7 +15,7 @@ function setProductID(id) {
   window.location.href = 'product-info.html';
 }
 
-function productCardInfo(p) {
+function productCardInfo(p, rl) {
   const card = document.createElement("div");
   card.className = "row mt-5"
 
@@ -73,7 +73,26 @@ function productCardInfo(p) {
       
     </div>
   </div>
-  </div>`
+  </div>
+  <div class="col-md-6"id= "relatedProductsDiv">
+        <h5 class="h5" >Productos similares:</h5>
+        
+         ${Array.isArray(rl) && rl.length > 0
+          ? (() => {
+         let productListHTML = '';
+         rl.forEach((product) => {
+          productListHTML += `
+          <div id="relatedProduct">
+          ${product.name}
+          <br>
+          <img src="${product.image}" alt="${product.name}" width="250">
+          </div>
+         `;
+          });
+          return productListHTML;
+          })()
+          : 'No hay productos similares'}
+        </div>`
   /*
   .color1 { #295264 };
   .color2 { #fad9a6 };
@@ -87,9 +106,9 @@ function productCardInfo(p) {
 }
 
 //3
-function showProductInfo(product) {
+function showProductInfo(product, related) {
   containerInfo.innerHTML = "";
-  let pCard = productCardInfo(product);
+  let pCard = productCardInfo(product, related);
   containerInfo.appendChild(pCard);
 
 }
@@ -103,7 +122,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
       console.log(response);
       if (response.status === "ok") {
         let product = response.data;
-        showProductInfo(product);
+        let relatedProducts = product.relatedProducts;
+        console.log(relatedProducts)
+        showProductInfo(product, relatedProducts);
+        this.title = product.name
       }
     })
   const productCommentURL = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
