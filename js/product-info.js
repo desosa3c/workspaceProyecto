@@ -76,8 +76,6 @@ function productCardInfo(p, rl) {
   </div>
   </div>
   <div class="row"id= "relatedProductsDiv">
-        <h5 class="h5 mt-5" >Productos similares</h5>
-        
         <div class="row mt-4"id= "relatedProductsDiv">
         <h5 class="h5" >Productos similares</h5>
         
