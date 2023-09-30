@@ -86,7 +86,7 @@ function productCardInfo(p, rl) {
         let productListHTML = '';
         rl.forEach((product) => {
           productListHTML += `
-          <div class="card mb-4 shadow-sm custom-card cursor-active" style="width: 20rem;">
+          <div id="relatedProduct" onclick="setProductID(${product.id}) " class="card mb-4 shadow-sm custom-card cursor-active" style="width: 20rem;">
             <img src="${product.image}" class="card-img-top" alt="${product.name}">
             <div class="card-body">
             <div></div
