@@ -1,5 +1,5 @@
 const comentariosContainer = document.getElementById("containerComments");
-//1
+
 function generarEstrellas(puntuacion) {
   const maxPuntuacion = 5;
   const estrellaLlena = `<span class="fa fa-star checked"></span>`;
@@ -9,7 +9,7 @@ function generarEstrellas(puntuacion) {
   return estrellasLlenas + estrellasVacias;
 };
 
-//2
+
 function setProductID(id) {
   localStorage.setItem('selectedProductID', id);
   window.location.href = 'product-info.html';
@@ -75,38 +75,35 @@ function productCardInfo(p, rl) {
     </div>
   </div>
   </div>
-  <div class="col-md-6"id= "relatedProductsDiv">
-        <h5 class="h5" >Productos similares:</h5>
+  <div class="row"id= "relatedProductsDiv">
+        <h5 class="h5 mt-5" >Productos similares</h5>
+        
+        <div class="row mt-4"id= "relatedProductsDiv">
+        <h5 class="h5" >Productos similares</h5>
         
          ${Array.isArray(rl) && rl.length > 0
-          ? (() => {
-         let productListHTML = '';
-         rl.forEach((product) => {
+      ? (() => {
+        let productListHTML = '';
+        rl.forEach((product) => {
           productListHTML += `
-          <div id="relatedProduct" onclick="setProductID(${product.id})">
-          ${product.name}
-          <br>
-          <img src="${product.image}" alt="${product.name}" width="250">
+          <div class="card mb-4 shadow-sm custom-card cursor-active" style="width: 20rem;">
+            <img src="${product.image}" class="card-img-top" alt="${product.name}">
+            <div class="card-body">
+            <div></div
+            <h5 class="card-title">${product.name}</h5>
+          </div>
           </div>
          `;
-          });
-          return productListHTML;
-          })()
-          : 'No hay productos similares'}
+        });
+        return productListHTML;
+      })()
+      : 'No hay productos similares'}
         </div>`
-  /*
-  .color1 { #295264 };
-  .color2 { #fad9a6 };
-  .color3 { #bd2f28 };
-  .color4 { #89373d };
-  .color5 { #142433 };
-
-  */
-
+  //7
   return card;
 }
 
-//3
+
 function showProductInfo(product, related) {
   containerInfo.innerHTML = "";
   let pCard = productCardInfo(product, related);
@@ -132,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   const productCommentURL = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
 
 
-  //4
+
   function productComments(comment) {
     const card = document.createElement("div");
     card.className = "col-md-6"
@@ -168,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       console.error(error);
     });
 
-  //5
+
   function handleStarClick(score) {
     // Agrega la clase "checked" a la estrella seleccionada y a las anteriores
     stars.forEach((s, index) => {
@@ -179,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       }
     });
   }
-  //6
+
   function agregarcomentario(punt, coment) {
     let infoUser = JSON.parse(localStorage.getItem('userData'));
     let userName = infoUser.user.userName;
@@ -202,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     document.getElementById('Comentario').value = '';
     handleStarClick(0);
   };
-  //7
+
   const stars = document.querySelectorAll(".fa-star");
   stars.forEach((star) => {
     star.addEventListener("click", () => {
@@ -220,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
     return count;
   };
-  //8
+
   newComment.addEventListener("click", () => {
     let comentario = document.getElementById("Comentario").value;
     const starsSelected = cantidadestrellas();

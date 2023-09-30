@@ -51,6 +51,7 @@ let checkUser = function () {
     let userName = infoUser.user.userName;
     let perfil = document.getElementById('perfil');
 
+    //1
     perfil.innerHTML = '<div class="dropdown"><a class="btn btn-secondary dropdown-toggle" href="my-profile.html" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">'
       + userName + '</a><ul class="dropdown-menu" aria-labelledby="dropdownMenuLink"><li><a class="dropdown-item" href="cart.html">Mi carrito</a></li><li><a class="dropdown-item" href="my-profile.html">Mi Perfil</a></li><li><a class="dropdown-item" href="login.html">Cerrar sesión</a></li><li><button onclick="switchTheme()" class="btn rounded-fill " id="btnSwitchTheme">Cambiar tema<i class="bx bxs-moon" id="dt-icon"></i></i></button></li></ul></div>'
 
@@ -62,6 +63,8 @@ let checkUser = function () {
 checkUser();
 
 //Deslogueo
+
+//2
 let logout = function () {
   localStorage.removeItem('userData');
   alert('Somos tus unicos amigos!!');
@@ -70,23 +73,27 @@ let logout = function () {
 
 //Cambiar a modo oscuro
 
+//3
 const darkTheme = () => {
   document.querySelector('body').setAttribute('data-bs-theme', 'dark');
   document.querySelector('#dt-icon').setAttribute('class', 'bx bxs-sun')
   localStorage.setItem('theme', 'dark');
 }
 
+//4
 const lightTheme = () => {
   document.querySelector('body').setAttribute('data-bs-theme', 'light');
   document.querySelector('#dt-icon').setAttribute('class', 'bx bxs-moon');
   localStorage.setItem('theme', 'light');
 }
 
+//5
 const switchTheme = () => {
   document.querySelector('body').getAttribute('data-bs-theme') === 'light' ?
     darkTheme() : lightTheme();
 }
 
+//6
 if (localStorage.getItem('theme') === 'dark') {
   darkTheme();
 } else {
