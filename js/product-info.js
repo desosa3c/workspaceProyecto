@@ -13,6 +13,7 @@ function generarEstrellas(puntuacion) {
 function setProductID(id) {
   localStorage.setItem('selectedProductID', id);
   window.location.href = 'product-info.html';
+  console.log(id);
 }
 
 function productCardInfo(p, rl) {
@@ -82,7 +83,7 @@ function productCardInfo(p, rl) {
          let productListHTML = '';
          rl.forEach((product) => {
           productListHTML += `
-          <div id="relatedProduct">
+          <div id="relatedProduct" onclick="setProductID(${product.id})">
           ${product.name}
           <br>
           <img src="${product.image}" alt="${product.name}" width="250">
