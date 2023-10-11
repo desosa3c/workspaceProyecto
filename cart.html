@@ -8,11 +8,8 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -40,40 +37,87 @@
     </div>
   </nav>
   <main>
-    <!-- <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div> -->
 
-    <div class="envio">
-      <div class="tip_envio">
-        <h5>Tipo de envio</h5>
-        <label for=""><input type="radio" id="cbox1" value="premium_checkbox" />Premium 2 a 5 dias (15%)</label>
-        <label for=""><input type="radio" id="cbox2" value="express_checkbox" />Express 5 a 8 dias (7%)</label>
-        <label for=""><input type="radio" id="cbox3" value="standar_checkbox" />Standard 12 a 15 dias (5%)</label>
+    <div class="container cart p-3">
+      <div class="headCart p-3">
+        <h1>Carrito de compras</h1>
       </div>
-      <div class="direccion">
-        <h5>Direccion de envio</h5>
-        <div class="calles">
-          <label for="calle">Calle</label>
-          <br>  
-            <textarea id="calle" name="calle" cols="50" rows="1"></textarea>
-          <br>
+      <hr>
+      <div class="bodyCart">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Foto</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Precio Unitario</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Sub-total</th>
+              <th scope="col"> </th>
+            </tr>
+          </thead>
+          <tbody id="bodyCart">
+
+          </tbody>
+        </table>
+
+
+
+        <div class="total d-flex justify-content-between align-items- p-3 fw-bold">
+          <p class="text-start col-9">Total</p>
+          <p class="text-center col-3">$$$</p>
         </div>
-        <div class="numero">
-          <label for="numb">Numero</label>
-          <br>  
-            <textarea id="numb" name="numero" cols="50" rows="1"></textarea>
-          <br>
+
+        <hr>
+
+        <div class="envio">
+          <div class="tipo w-100">
+            <h3>Tipo de envío</h3>
+            <div class="checkType row">
+              <div class="envioExpress col-12 d-flex">
+                <input class="form-check-input" type="radio" name="tipoDeEnvio">
+                <label class="w-25" for="tipoDeEnvio">Express</label>
+                <div class="detailsAndPrice d-flex w-100 ">
+                  <p class="text-center col-9">Llega en 3 horas</p>
+                  <p class="text-center col-3">$precio</p>
+                </div>
+
+              </div>
+              <div class="envioComun col-12 d-flex">
+                <input class="form-check-input" type="radio" name="tipoDeEnvio">
+                <label class="w-25" for="tipoDeEnvio">Común</label>
+                <div class="detailsAndPrice d-flex w-100 ">
+                  <p class="text-center col-9">Llega entre 2-4 dias</p>
+                  <p class="text-center col-3">$precio</p>
+                </div>
+              </div>
+              <div class="envioSinCosto col-12 d-flex">
+                <input class="form-check-input" type="radio" name="tipoDeEnvio">
+                <label class="w-25" for="tipoDeEnvio">Gratis</label>
+                <div class="detailsAndPrice d-flex w-100 ">
+                  <p class="text-center col-9">Llega entre 1-3 semanas</p>
+                  <p class="text-center col-3">Gratis</p>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="datosDeEnvio">
+              <h3>Datos de envío</h3>
+              <label for="direccion">Direccion</label>
+              <input name="direccion" class="form-control w-25" type="text" placeholder="Calle falsa 123">
+              <br>
+              <label for="direccion">Esquina</label>
+              <input name="direccion" class="form-control w-25" type="text" placeholder="Isla de las flores">
+              <br>
+              <label for="direccion">Barrio</label>
+              <input name="direccion" class="form-control w-25" type="text" placeholder="Colón">
+            </div>
+          </div>
         </div>
-        <div class="esquina">
-          <label for="esqui">Esquina</label>
-          <br>  
-            <textarea id="esqui" name="esqui" cols="50" rows="1"></textarea>
-          <br>
-        </div>
-        </div>
+
+      </div>
+      <div class="btnBuy d-flex justify-content-end w-100 ">
+        <button class="btn btn-outline-primary">COMPRAR</button>
       </div>
     </div>
   </main>
@@ -82,7 +126,8 @@
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+      </p>
     </div>
   </footer>
   <div id="spinner-wrapper">

@@ -104,3 +104,39 @@ if (localStorage.getItem('theme') === 'dark') {
 /*
 
 */
+
+//Gestion del carrito
+function checkCart() {
+  let cart = [];
+
+  //Verifica si hay informacion en el localStorage(cart);
+  /* Si no hay info. Trae un carrito con el ID de usuario proporcionado 
+  en la letra del proyecto. Y se guarda en el localStorage.*/
+  if (localStorage.getItem('cart') === null) {
+    getJSONData(CART_INFO_URL)
+      .then(response => {
+        if (response.status === 'ok') {
+          cart = response.data.articles;
+          localStorage.setItem('cart', JSON.stringify(cart));
+        }
+      });
+
+    /* Si ya hay datos en el localStorage, 
+    se obtienen y se parsean de nuevo a un array. */
+  } else {
+    cart = JSON.parse(localStorage.getItem('cart'));
+  }
+
+  return cart;
+}
+
+
+checkCart();
+
+
+//addToCart
+function addToCart(newArticle) {
+  let cart = checkCart();
+  cart.push(newArticle);
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
