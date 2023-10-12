@@ -1,5 +1,5 @@
 const cartBodyContainer = document.getElementById('bodyCart');
-
+let arraysubtotal = [];
 function setProductID(id) {
     localStorage.setItem('selectedProductID', id);
     window.location.href = 'product-info.html';
@@ -15,11 +15,11 @@ function createCartItem(article) {
     <td>${article.currency} ${article.unitCost}</td>
     <td>
         <div class="cantidad w-25">
-            <input type="number" class="amount" name="amount" min="1" max="100" />
+            <input type="number" class="amount" name="amount" min="1" max="100" id="num-cant-prod"/>
         </div>
     </td>
-    <td>${article.currency} ${article.unitCost} </td>
-        <td><button class="btn btn-primary">ELIMINAR</button></td>`;
+    <td id="subtotal">${article.currency} ${article.unitCost} </td>
+    <td><button class="btn btn-primary">ELIMINAR</button></td>`;
 
     return body;
 }
@@ -35,6 +35,7 @@ function showCart() {
         cart.forEach((article) => {
             const cartItem = createCartItem(article);
             cartBodyContainer.appendChild(cartItem); //agrega la fila al contenedor.
+            arraysubtotal.push(article.unitCost);
         });
     }
 }
@@ -43,5 +44,11 @@ function showCart() {
 document.addEventListener('DOMContentLoaded', function () {
 
     showCart();
-
+    let btn = document.getElementById("num-cant-prod");
+    btn.addEventListener("input", ()=>{
+        let tb = document.getElementById("subtotal");
+        let cantidad = arraysubtotal[0]*(btn.value);
+        console.log(cantidad);
+        tb.textContent = `USD ${cantidad}`;
+    });
 });
