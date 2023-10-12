@@ -1,19 +1,25 @@
 const cartBodyContainer = document.getElementById('bodyCart');
 
+function setProductID(id) {
+    localStorage.setItem('selectedProductID', id);
+    window.location.href = 'product-info.html';
+    console.log(id);
+  }
+  
 function createCartItem(article) {
     const body = document.createElement('tr');
     body.innerHTML = `<td class="col-2">
-        <img class="img-fluid" src="/img/car1.jpg" alt="producto">
+        <img class="img-fluid" src=${article.image} alt="producto" onclick="setProductID(${article.id})">
     </td>
-    <td><a class="titleLink" href="/product-info.html">${article.name}</a></td>
+    <td onclick="setProductID(${article.id})"> ${article.name} </td> 
     <td>${article.currency} ${article.unitCost}</td>
     <td>
         <div class="cantidad w-25">
             <input type="number" class="amount" name="amount" min="1" max="100" />
         </div>
     </td>
-    <td>${article.currency} 34.000</td>
-    <td><button class="btn btn-primary">ELIMINAR</button></td>`;
+    <td>${article.currency} ${article.unitCost} </td>
+        <td><button class="btn btn-primary">ELIMINAR</button></td>`;
 
     return body;
 }

@@ -3,7 +3,7 @@ const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publi
 const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/";
 const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
 const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
-const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
+const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
@@ -137,6 +137,6 @@ checkCart();
 //addToCart
 function addToCart(newArticle) {
   let cart = checkCart();
-  cart.push(newArticle);
+  cart.push(newArticle); 
   localStorage.setItem('cart', JSON.stringify(cart));
 }
