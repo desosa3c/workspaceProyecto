@@ -33,7 +33,7 @@ body {
 
 .container-form.hide{
     position: absolute;
-    margin-top: -200%;
+    margin-top: -300%;
     transition: all 1s ease;
 
 }

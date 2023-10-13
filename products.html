@@ -10,10 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -40,49 +37,101 @@
       </div>
     </div>
   </nav>
-  <main class="pb-5 container">
-    <div class="row">
-      <div class="col text-end">
-        <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
-          <input type="radio" class="btn-check" name="options" id="sortAsc">
-          <label class="btn btn-light" for="sortAsc"><i class="fas fa-sort-amount-up mr-1">$</i></label>
-          <input type="radio" class="btn-check" name="options" id="sortDesc">
-          <label class="btn btn-light" for="sortDesc"><i class="fas fa-sort-amount-down mr-1">$</i></label>
-          <input type="radio" class="btn-check" name="options" id="sortByCount" checked>
-          <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1">Rel.</i></label>
+  <main class="pb-5 container maintContainer">
+    <div class=" container row w-100 d-flex justify-content-between pt-3 ">
+      <div class="buscarProducto col-8 hiden ">
+        <div class="d-flex justify-content-start ">
+          <input class="form-control " type="search" placeholder="Buscar" id="searchInput">
+        </div>
+      </div>
+      <div class="ordenarPor col-3 d-flex">
+        <div class="dropdown hiden">
+          <button class="btn btn-secondary dropdown-toggle hiden" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Ordenar
+          </button>
+          <ul class="dropdown-menu">
+            <div class="btn-group btn-group-toggle mb-4 row" data-bs-toggle="buttons">
+              <li> <input type="radio" class="btn-check" name="options" id="sortAsc"></li>
+              <li><label class="btn btn-light w-100" for="sortAsc">Menor precio <i
+                    class="fas fa-sort-amount-up mr-1"></i></label>
+              </li>
+              <li><input type="radio" class="btn-check" name="options" id="sortDesc"></li>
+              <li><label class="btn btn-light  w-100" for="sortDesc">Mayor precio <i
+                    class="fas fa-sort-amount-down mr-1"></i></label></li>
+              <li><input type="radio" class="btn-check" name="options" id="sortByCount" checked></li>
+              <li><label class="btn btn-light  w-100" for="sortByCount">Relevancia<i
+                    class="fas fa-sort-amount-down mr-1"></i></label></li>
+            </div>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="row" style="position: relative; right: 200px;">
-      <div class="col-lg-7 offset-lg-6 col-md-12 mb-1 container">
-        <div class="row container p-0 m-0">
-          
-          <div class="col">
-            <div class="col" style="display: flex; flex-direction: row;">
-              <label for="searchPrice" class="input-group-text" style="background-color: rgba(245, 245, 245, 0); border: none;">Buscar</label>
-              <input class="form-control" type="search" placeholder="Buscar producto" id="searchInput" style="width: 200px;">
-            </div>
+    </div>
+    <div class="container row d-flex justify-content-between pt-5">
+
+      <div class="buscarProducto col-2 d-flex justify-content-start">
+
+        <div class="d-flex justify-content-start dontShow">
+          <label for="searchPrice dontShow" class="input-group-text dontShow"
+            style="background-color: rgba(245, 245, 245, 0); border: none;">Buscar</label>
+          <input class="form-control col-2 dontShow" type="search" placeholder="Buscar" id="searchInput">
+        </div>
+
+      </div>
+
+      <div class="filtrarPorPrecio col-4 d-flex justify-content-between dontShow">
+
+        <div class=" col-2 d-flex justify-content-start dontShow">
+          <p class="font-weight-normal text-end my-2 dontShow">Precio</p>
+        </div>
+
+        <div class="inputsFiltro col-8 d-flex justify-content-start dontShow">
+
+          <div class="col-5 ">
+            <input class="form-control dontShow" type="number" placeholder="min." id="rangeFilterPriceMin">
           </div>
-          <div class="col">
-            <p class="font-weight-normal text-end my-2">Precio</p>
+
+          <div class="col-5">
+            <input class="form-control dontShow" type="number" placeholder="máx." id="rangeFilterPriceMax">
           </div>
-          <div class="col">
-            <input class="form-control" type="number" placeholder="min." id="rangeFilterPriceMin">
+
+        </div>
+        <div class="btnsFiltrarLimpiar col-2 d-flex justify-content-start">
+          <div class="btn-group dontShow" role="group">
+            <button class="btn btn-light btn-block border border-black " id="filterPrice">Filtrar</button>
+            <button class="btn btn-light btn-block border border-black" id="clearRangeFilter">Limpiar</button>
           </div>
-          <div class="col">
-            <input class="form-control" type="number" placeholder="máx." id="rangeFilterPriceMax">
-          </div>
-          
-          
-          <div class="col-1 p-0">
-            <div class="btn-group" role="group">
-              <button class="btn btn-light btn-block" id="filterPrice">Filtrar</button>
-              <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
-            </div>
-                     
-          </div>
+
         </div>
       </div>
+
+
+
+      <div class="ordenarPor col-3 d-flex justify-content-end dontShow">
+        <div class="dropdown dontShow">
+          <button class="btn btn-secondary dropdown-toggle " type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Ordenar
+          </button>
+          <ul class="dropdown-menu">
+            <div class="btn-group btn-group-toggle mb-4 row" data-bs-toggle="buttons">
+              <li> <input type="radio" class="btn-check" name="options" id="sortAsc"></li>
+              <li><label class="btn btn-light w-100" for="sortAsc">Menor precio <i
+                    class="fas fa-sort-amount-up mr-1"></i></label>
+              </li>
+              <li><input type="radio" class="btn-check" name="options" id="sortDesc"></li>
+              <li><label class="btn btn-light  w-100" for="sortDesc">Mayor precio <i
+                    class="fas fa-sort-amount-down mr-1"></i></label></li>
+              <li><input type="radio" class="btn-check" name="options" id="sortByCount" checked></li>
+              <li><label class="btn btn-light  w-100" for="sortByCount">Relevancia<i
+                    class="fas fa-sort-amount-down mr-1"></i></label></li>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     </div>
     <div class="container">
       <div class="row" id="productContainer">
@@ -95,7 +144,8 @@
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+      </p>
     </div>
   </footer>
   <div id="spinner-wrapper">
