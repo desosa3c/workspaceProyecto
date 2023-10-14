@@ -24,6 +24,7 @@ function createCartItem(article, indice) {
     return body;
 }
 
+//funcion para eliminar el artículo y actualiza el almacenamiento local 
 function removeItem(index) {
     const cart = checkCart();
     if (cart !== null && index >= 0 && index < cart.length) {
@@ -34,6 +35,7 @@ function removeItem(index) {
     }
 }
 
+//clearCartUI limpia la interfaz de usuario antes de volver a mostrar el carrito actualizado.
 function clearCartUI() {
     while (cartBodyContainer.firstChild) {
         cartBodyContainer.removeChild(cartBodyContainer.firstChild);
