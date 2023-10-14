@@ -1,6 +1,7 @@
 const cartBodyContainer = document.getElementById('bodyCart');
 let arraysubtotal = [];
 let arrayindice = [];
+let arraytotal = [];
 function setProductID(id) {
     localStorage.setItem('selectedProductID', id);
     window.location.href = 'product-info.html';
@@ -35,6 +36,7 @@ function showCart() {
         for (let i = 0; i < largo; i++) {
             arrayindice.push(i);
             arraysubtotal.push(cart[i].unitCost);
+            arraytotal.push(0);
             const cartItem = createCartItem(cart[i], i);
             cartBodyContainer.appendChild(cartItem); //agrega la fila al contenedor.
         };
@@ -44,7 +46,15 @@ function showCart() {
         let btn = document.getElementById(`num-cant-prod-${i}`);
         btn.addEventListener("input", () => {
             let tb = document.getElementById(`subtotal-${i}`);
+            let p = document.getElementById("total_txt")
+
             let cantidad = arraysubtotal[i] * (btn.value);
+            arraytotal[i] = cantidad;
+            let total = 0;
+            arraytotal.forEach(element => {
+                total +=element;
+            });
+            p.textContent = `USD ${total}`;
             tb.textContent = `USD ${cantidad}`;
         });
     }
