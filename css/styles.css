@@ -32,7 +32,7 @@ nav a {
 }
 
 .jumbotron {
-  height: 5vh;
+  
   padding: 5em inherit;
   margin-bottom: 0;
   background-color: #53C0FB;
@@ -62,7 +62,7 @@ nav a {
   .jumbotron {
     padding-top: 7rem;
     padding-bottom: 6rem;
-
+    height: 5vh;
   }
 }
 

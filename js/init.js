@@ -136,7 +136,8 @@ checkCart();
 
 //addToCart
 function addToCart(newArticle) {
+  console.log(newArticle);
   let cart = checkCart();
-  cart.push(newArticle); 
+  cart.push(newArticle);
   localStorage.setItem('cart', JSON.stringify(cart));
 }
