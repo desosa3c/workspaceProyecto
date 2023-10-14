@@ -64,7 +64,7 @@ checkUser();
 
 //Deslogueo
 
-//2
+
 let logout = function () {
   localStorage.removeItem('userData');
   alert('Somos tus unicos amigos!!');
@@ -73,27 +73,27 @@ let logout = function () {
 
 //Cambiar a modo oscuro
 
-//3
+
 const darkTheme = () => {
   document.querySelector('body').setAttribute('data-bs-theme', 'dark');
   document.querySelector('#dt-icon').setAttribute('class', 'bx bxs-sun')
   localStorage.setItem('theme', 'dark');
 }
 
-//4
+
 const lightTheme = () => {
   document.querySelector('body').setAttribute('data-bs-theme', 'light');
   document.querySelector('#dt-icon').setAttribute('class', 'bx bxs-moon');
   localStorage.setItem('theme', 'light');
 }
 
-//5
+
 const switchTheme = () => {
   document.querySelector('body').getAttribute('data-bs-theme') === 'light' ?
     darkTheme() : lightTheme();
 }
 
-//6
+
 if (localStorage.getItem('theme') === 'dark') {
   darkTheme();
 } else {
@@ -135,9 +135,37 @@ checkCart();
 
 
 //addToCart
-function addToCart(newArticle) {
-  console.log(newArticle);
+async function addToCart(articleID, categoryID) {
+  articleID = parseInt(articleID);
   let cart = checkCart();
-  cart.push(newArticle);
+  let cartProduct = cart.find(p => (p.id === articleID));
+  if (cartProduct) {
+
+    cart = cart.map(article => {
+      if (article.id === articleID) {
+        article.count++;
+      }
+      return article;
+    })
+
+  } else {
+    const response = await getJSONData(PRODUCTS_URL + categoryID + '.json');
+    const product = response.data.products.find(p => (p.id === articleID));
+    if (product) {
+      const newArticle = {
+        count: 1,
+        currency: product.currency,
+        id: product.id,
+        image: product.image,
+        name: product.name,
+        unitCost: product.cost,
+      }
+
+      newArticle.count = 1;
+      cart.push(newArticle);
+
+    }
+  }
   localStorage.setItem('cart', JSON.stringify(cart));
+
 }

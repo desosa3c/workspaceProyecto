@@ -76,7 +76,6 @@ function showProductsList(arrayproduct) {
 
     productContainer.appendChild(pCard);
   });
-  console.log(arrayproduct);
 }
 
 function sortAndShowProducts(criteria, array) {

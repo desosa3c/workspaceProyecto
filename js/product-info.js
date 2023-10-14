@@ -13,7 +13,6 @@ function generarEstrellas(puntuacion) {
 function setProductID(id) {
   localStorage.setItem('selectedProductID', id);
   window.location.href = 'product-info.html';
-  console.log(id);
 }
 
 function productCardInfo(p, rl) {
@@ -59,14 +58,14 @@ function productCardInfo(p, rl) {
   </div>
   <div id="productInfo" class="col-sm-12 col-lg-5">
     
-      <p>Categorias: <a class="linkProductInfo" href="categories.html">${p.category}</a></p>
+      <p>Categorias: <a class="linkProductInfo" href="products.html">${p.category}</a></p>
       <h2 style="font-size: 6vh">${p.name}</h2>
       <p>${p.soldCount} vendidos</p>
       <p style="font-size: 2vh"> ${p.description}</p><br>
       
       <h3 style="font-size: 4vh">${p.currency} ${p.cost}</h3>
-      <button type="button" class="btn btn-primary">Comprar <i class='bx bx-right-arrow-alt'></i></button>
-      <button type="button" class="btn btn-outline-primary">Agregar al carro<i class='bx bx-cart-add'></i></button>
+      <button type="button" class="btn btn-primary" id="btnBuyNow">Comprar <i class='bx bx-right-arrow-alt'></i></button>
+      <button type="button" class="btn btn-outline-primary" id="btnAddToCart">Agregar al carro<i class='bx bx-cart-add'></i></button>
       <button type="button" class="btn btn-outline-danger"><i class='bx bxs-heart'  ></i></button>
       <br>
       <br>
@@ -97,7 +96,9 @@ function productCardInfo(p, rl) {
       })()
       : 'No hay productos similares'}
         </div>`
-  //7
+
+
+
   return card;
 }
 
@@ -107,19 +108,36 @@ function showProductInfo(product, related) {
   let pCard = productCardInfo(product, related);
   containerInfo.appendChild(pCard);
 
+  //addToCart
+  const btnAddToCart = document.getElementById('btnAddToCart');
+  btnAddToCart.addEventListener('click', e => {
+    const productID = localStorage.getItem('selectedProductID');
+    const catID = localStorage.getItem('catID');
+    addToCart(productID, catID);
+  })
+
+  //comprar
+  const btnBuyNow = document.getElementById('btnBuyNow')
+  btnBuyNow.addEventListener('click', e => {
+    const productID = localStorage.getItem('selectedProductID');
+    const catID = localStorage.getItem('catID');
+    addToCart(productID, catID);
+    window.location.href = './cart.html';
+  })
+
 }
 
 document.addEventListener("DOMContentLoaded", function (e) {
   const productID = localStorage.getItem('selectedProductID');
-  console.log(productID);
+
   const productInfoURL = `https://japceibal.github.io/emercado-api/products/${productID}.json`;
   getJSONData(productInfoURL)
     .then(response => {
-      console.log(response);
+
       if (response.status === "ok") {
         let product = response.data;
         let relatedProducts = product.relatedProducts;
-        console.log(relatedProducts)
+
         showProductInfo(product, relatedProducts);
         this.title = product.name
       }
@@ -229,4 +247,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
       agregarcomentario(starsSelected, comentario);
     }
   });
+
+
+
+
+
+
+
+
+
 });

@@ -1,13 +1,12 @@
 const cartBodyContainer = document.getElementById('bodyCart');
 let arraysubtotal = [];
-let arrayindice =[];
+let arrayindice = [];
 function setProductID(id) {
     localStorage.setItem('selectedProductID', id);
     window.location.href = 'product-info.html';
-    console.log(id);
-  }
-  
-function createCartItem(article,indice) {
+}
+
+function createCartItem(article, indice) {
     const body = document.createElement('tr');
     body.innerHTML = `<td class="col-2">
         <img class="img-fluid" src=${article.image} alt="producto" onclick="setProductID(${article.id})">
@@ -33,7 +32,7 @@ function showCart() {
     const cart = checkCart();
     if (cart !== null) {
         let largo = cart.length;
-        for(let i=0; i<largo;i++){
+        for (let i = 0; i < largo; i++) {
             arrayindice.push(i);
             arraysubtotal.push(cart[i].unitCost);
             const cartItem = createCartItem(cart[i], i);
@@ -41,11 +40,11 @@ function showCart() {
         };
     }
     let largo = arrayindice.length;
-    for(let i = 0; i<largo;i++){
+    for (let i = 0; i < largo; i++) {
         let btn = document.getElementById(`num-cant-prod-${i}`);
-        btn.addEventListener("input", ()=>{
+        btn.addEventListener("input", () => {
             let tb = document.getElementById(`subtotal-${i}`);
-            let cantidad = arraysubtotal[i]*(btn.value);
+            let cantidad = arraysubtotal[i] * (btn.value);
             tb.textContent = `USD ${cantidad}`;
         });
     }
