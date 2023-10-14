@@ -16,7 +16,7 @@ function createCartItem(article, indice) {
     <td>${article.currency} ${article.unitCost}</td>
     <td>
         <div class="cantidad w-25">
-            <input type="number" class="amount" name="amount" min="1" max="100" id="num-cant-prod-${indice}"/>
+            <input type="number" class="amount" name="amount" value="${article.count}" min="1" max="100" id="num-cant-prod-${indice}"/>
         </div>
     </td>
     <td id="subtotal-${indice}">${article.currency} ${article.unitCost} </td>
@@ -28,11 +28,11 @@ function createCartItem(article, indice) {
 function removeItem(index) {
     const cart = checkCart();
     if (cart !== null && index >= 0 && index < cart.length) {
-        const removedItem = cart.splice(index, 1)[0];
+        cart.splice(index, 1)[0];
         localStorage.setItem('cart', JSON.stringify(cart));
         clearCartUI();
-        updateTotal(); 
         showCart();
+        updateTotal(); 
     }
 }
 
@@ -51,6 +51,9 @@ function showCart() {
     const cart = checkCart();
     if (cart !== null) {
         let largo = cart.length;
+        arrayindice =[];
+        arraysubtotal =[];
+        arraytotal=[];
         for (let i = 0; i < largo; i++) {
             arrayindice.push(i);
             arraysubtotal.push(cart[i].unitCost);
@@ -60,8 +63,10 @@ function showCart() {
         };
     }
     let largo = arrayindice.length;
+    
     for (let i = 0; i < largo; i++) {
         let btn = document.getElementById(`num-cant-prod-${i}`);
+        console.log(i);
         btn.addEventListener("input", () => {
             let tb = document.getElementById(`subtotal-${i}`);
             let p = document.getElementById("total_txt")
@@ -83,7 +88,17 @@ function updateTotal() {
     if (cart !== null) {
         let total = 0;
         cart.forEach(item => {
-            total += item.unitCost;
+            let i = 0;
+            while(item.unitCost != arraysubtotal[i]){
+                i++;
+            }
+            if(i < arraysubtotal.length){
+                let btn = document.getElementById(`num-cant-prod-${i}`);
+                total += item.unitCost * btn.value;
+            }else{
+                total += item.unitCost;
+            }
+            console.log(total);
             currency = item.currency;
         });
         const totalElement = document.getElementById('total_txt');
@@ -94,5 +109,5 @@ function updateTotal() {
 //Muestro el carrito luego de que cargue el DOM.
 document.addEventListener('DOMContentLoaded', function () {
     showCart();
-    updateTotal()
+    updateTotal();
 });
