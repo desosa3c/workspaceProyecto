@@ -69,7 +69,7 @@ function showCart() {
             arraytotal[i] = cantidad;
             let total = 0;
             arraytotal.forEach(element => {
-                total +=element;
+                total += element;
             });
             p.textContent = `USD ${total}`;
             tb.textContent = `USD ${cantidad}`;
@@ -83,9 +83,10 @@ function updateTotal() {
         let total = 0;
         cart.forEach(item => {
             total += item.unitCost;
+            currency = item.currency;
         });
         const totalElement = document.getElementById('total_txt');
-        totalElement.textContent = `USD ${total}`;
+        totalElement.textContent = `${currency} ${total}`;
     }
 }
 
