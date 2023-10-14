@@ -28,9 +28,10 @@ function createCartItem(article, indice) {
 function removeItem(index) {
     const cart = checkCart();
     if (cart !== null && index >= 0 && index < cart.length) {
-        cart.splice(index, 1);
+        const removedItem = cart.splice(index, 1)[0];
         localStorage.setItem('cart', JSON.stringify(cart));
         clearCartUI();
+        updateTotal(); 
         showCart();
     }
 }
