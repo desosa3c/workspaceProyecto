@@ -20,9 +20,24 @@ function createCartItem(article, indice) {
         </div>
     </td>
     <td id="subtotal-${indice}">${article.currency} ${article.unitCost} </td>
-    <td><button class="btn btn-primary">ELIMINAR</button></td>`;
-
+    <td><button class="btn btn-primary" onclick="removeItem(${indice})">ELIMINAR</button></td>`;
     return body;
+}
+
+function removeItem(index) {
+    const cart = checkCart();
+    if (cart !== null && index >= 0 && index < cart.length) {
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        clearCartUI();
+        showCart();
+    }
+}
+
+function clearCartUI() {
+    while (cartBodyContainer.firstChild) {
+        cartBodyContainer.removeChild(cartBodyContainer.firstChild);
+    }
 }
 
 //Muestra los articulos del carrito.
