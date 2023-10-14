@@ -76,8 +76,21 @@ function showCart() {
         });
     }
 }
+//calcula el total sumando el costo unitario de todos los productos en el carrito 
+function updateTotal() {
+    const cart = checkCart();
+    if (cart !== null) {
+        let total = 0;
+        cart.forEach(item => {
+            total += item.unitCost;
+        });
+        const totalElement = document.getElementById('total_txt');
+        totalElement.textContent = `USD ${total}`;
+    }
+}
 
 //Muestro el carrito luego de que cargue el DOM.
 document.addEventListener('DOMContentLoaded', function () {
     showCart();
+    updateTotal()
 });
