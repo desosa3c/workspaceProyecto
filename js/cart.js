@@ -19,7 +19,7 @@ function createCartItem(article, indice) {
             <input type="number" class="amount" name="amount" value="${article.count}" min="1" max="100" id="num-cant-prod-${indice}"/>
         </div>
     </td>
-    <td id="subtotal-${indice}">${article.currency} ${article.unitCost} </td>
+    <td id="subtotal-${indice}">${article.currency} ${article.unitCost * article.count} </td>
     <td><button class="btn btn-primary" onclick="removeItem(${indice})">ELIMINAR</button></td>`;
     return body;
 }
@@ -32,7 +32,7 @@ function removeItem(index) {
         localStorage.setItem('cart', JSON.stringify(cart));
         clearCartUI();
         showCart();
-        updateTotal(); 
+        updateTotal();
     }
 }
 
@@ -51,9 +51,9 @@ function showCart() {
     const cart = checkCart();
     if (cart !== null) {
         let largo = cart.length;
-        arrayindice =[];
-        arraysubtotal =[];
-        arraytotal=[];
+        arrayindice = [];
+        arraysubtotal = [];
+        arraytotal = [];
         for (let i = 0; i < largo; i++) {
             arrayindice.push(i);
             arraysubtotal.push(cart[i].unitCost);
@@ -63,7 +63,7 @@ function showCart() {
         };
     }
     let largo = arrayindice.length;
-    
+
     for (let i = 0; i < largo; i++) {
         let btn = document.getElementById(`num-cant-prod-${i}`);
         console.log(i);
@@ -77,8 +77,8 @@ function showCart() {
             arraytotal.forEach(element => {
                 total += element;
             });
-            p.textContent = `USD ${total}`;
-            tb.textContent = `USD ${cantidad}`;
+            p.textContent = `${cart[i].currency} ${total}`;
+            tb.textContent = `${cart[i].currency} ${cantidad}`;
         });
     }
 }
@@ -89,13 +89,13 @@ function updateTotal() {
         let total = 0;
         cart.forEach(item => {
             let i = 0;
-            while(item.unitCost != arraysubtotal[i]){
+            while (item.unitCost != arraysubtotal[i]) {
                 i++;
             }
-            if(i < arraysubtotal.length){
+            if (i < arraysubtotal.length) {
                 let btn = document.getElementById(`num-cant-prod-${i}`);
                 total += item.unitCost * btn.value;
-            }else{
+            } else {
                 total += item.unitCost;
             }
             console.log(total);
@@ -111,3 +111,4 @@ document.addEventListener('DOMContentLoaded', function () {
     showCart();
     updateTotal();
 });
+

@@ -19,8 +19,6 @@ function productCardInfo(p, rl) {
   const card = document.createElement("div");
   card.className = "row mt-5"
 
-  let imagesHTML = ''
-
   //Se agrega el carrusel de imagenes
   //Los detalles del producto, titulo, precio y descripcion [div id="productInfo"]
   card.innerHTML = `
@@ -113,6 +111,7 @@ function showProductInfo(product, related) {
   btnAddToCart.addEventListener('click', e => {
     const productID = localStorage.getItem('selectedProductID');
     const catID = localStorage.getItem('catID');
+    addToast(product);
     addToCart(productID, catID);
   })
 

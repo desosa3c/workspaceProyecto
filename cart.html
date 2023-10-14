@@ -71,47 +71,52 @@
         <hr>
 
         <div class="envio">
-          <div class="tipo w-100">
-            <h3>Tipo de envío</h3>
-            <div class="checkType row">
-              <div class="envioExpress col-12 d-flex">
-                <input class="form-check-input" type="radio" name="tipoDeEnvio">
-                <label class="w-25" for="tipoDeEnvio">Express</label>
-                <div class="detailsAndPrice d-flex w-100 ">
-                  <p class="text-center col-9">Llega en 3 horas</p>
-                  <p class="text-center col-3">$350</p>
-                </div>
-
-              </div>
-              <div class="envioComun col-12 d-flex">
-                <input class="form-check-input" type="radio" name="tipoDeEnvio">
-                <label class="w-25" for="tipoDeEnvio">Común</label>
-                <div class="detailsAndPrice d-flex w-100 ">
-                  <p class="text-center col-9">Llega entre 2-4 dias</p>
-                  <p class="text-center col-3">$170</p>
-                </div>
-              </div>
-              <div class="envioSinCosto col-12 d-flex">
-                <input class="form-check-input" type="radio" name="tipoDeEnvio">
-                <label class="w-25" for="tipoDeEnvio">Gratis</label>
-                <div class="detailsAndPrice d-flex w-100 ">
-                  <p class="text-center col-9">Llega entre 1-3 semanas</p>
-                  <p class="text-center col-3">Gratis</p>
-                </div>
-              </div>
-            </div>
-            <hr>
-            <div class="datosDeEnvio">
-              <h3>Datos de envío</h3>
-              <label for="direccion">Direccion</label>
-              <input name="direccion" class="form-control w-25" type="text" placeholder="Calle falsa 123">
-              <br>
-              <label for="direccion">Esquina</label>
-              <input name="direccion" class="form-control w-25" type="text" placeholder="Isla de las flores">
-              <br>
-              <label for="direccion">Barrio</label>
-              <input name="direccion" class="form-control w-25" type="text" placeholder="Colón">
-            </div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col" class="col-4">Tipo de envío</th>
+                <th scope="col" class="col-3 text-center">Tiempo de entrega</th>
+                <th scope="col" class="col-5 text-end">Costo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="col" class="col-4"><input class="form-check-input" type="radio" name="tipoDeEnvio"
+                    id="envioPremium">
+                  <label for="envioPremium">Premium</label>
+                </td>
+                <td scope="col" class="col-3 text-center">Entre 2-5 dias
+                </td>
+                <td scope="col" class="col-5 text-end">15%</td>
+              </tr>
+              <tr>
+                <td scope="col" class="col-4"><input class="form-check-input" type="radio" name="tipoDeEnvio"
+                    id="envioExpress">
+                  <label for="envioExpress">Express
+                </td>
+                <td scope="col" class="col-3 text-center">Entre 5-8 dias</td>
+                <td scope="col" class="col-3 text-end">7%</td>
+              </tr>
+              <tr>
+                <td scope="col" class="col-4"><input class="form-check-input" type="radio" name="tipoDeEnvio"
+                    id="envioStandard">
+                  <label class="w-25" for="envioStandard">Standard</label>
+                </td>
+                <td scope="col" class="col-3 text-center">Entre 12-15 semanas</td>
+                <td scope="col" class="col-5 text-end">5%</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="datosDeEnvio">
+            <h3>Datos de envío</h3>
+            <label for="direccion">Direccion</label>
+            <input name="direccion" class="form-control w-25" type="text" placeholder="Calle falsa 123">
+            <br>
+            <label for="direccion">Esquina</label>
+            <input name="direccion" class="form-control w-25" type="text" placeholder="Isla de las flores">
+            <br>
+            <label for="direccion">Barrio</label>
+            <input name="direccion" class="form-control w-25" type="text" placeholder="Colón">
           </div>
         </div>
 

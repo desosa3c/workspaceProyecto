@@ -139,7 +139,7 @@ async function addToCart(articleID, categoryID) {
   articleID = parseInt(articleID);
   let cart = checkCart();
   let cartProduct = cart.find(p => (p.id === articleID));
-  if (cartProduct) {
+  if (cartProduct) {//Si el producto existe
 
     cart = cart.map(article => {
       if (article.id === articleID) {
@@ -169,3 +169,43 @@ async function addToCart(articleID, categoryID) {
   localStorage.setItem('cart', JSON.stringify(cart));
 
 }
+
+//Notificacion addToCart
+//const toastLiveExample = document.getElementById('liveToast');
+//const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+let toastCounter = 0;
+function addToast(article) {
+  const toastContainer = document.getElementById('toastContainer');
+  toastContainer.innerHTML += `
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="toast-${toastCounter}">
+        <div class="toast-header ">
+            <i class='bx bx-cart-add'></i>
+            <strong class="me-auto">Agregado al carrito</strong>
+            <small class="text-body-secondary">just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+         </div>
+         <div class="toast-body row">
+          <div class="col-3">
+            <img class="w-100" src="${article.images[0]}" alt="${article.name}" />
+          </div>
+          
+          <div class="col-8 d-flex justify-content-between">
+            <p>${article.name}</p>
+            <p>${article.currency} ${article.cost}</p>
+          </div>
+          <div class="col-12 totalPrice">
+            
+
+        </div>
+  </div>
+    `;
+  console.log(article);
+  const toastBody = document.getElementById(`toast-${toastCounter}`);
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastBody);
+  toastBootstrap.show();
+  toastCounter++;
+}
+
+
+
+
