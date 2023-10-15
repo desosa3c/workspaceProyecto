@@ -49,6 +49,7 @@ function clearCartUI() {
 para cada articulo. */
 function showCart() {
     const cart = checkCart();
+    console.log(cart);
     if (cart !== null) {
         let largo = cart.length;
         arrayindice = [];
@@ -87,6 +88,7 @@ function updateTotal() {
     const cart = checkCart();
     if (cart !== null) {
         let total = 0;
+        let currency ="USD";
         cart.forEach(item => {
             let i = 0;
             while (item.unitCost != arraysubtotal[i]) {
