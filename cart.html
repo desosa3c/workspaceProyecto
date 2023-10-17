@@ -122,7 +122,82 @@
 
       </div>
       <br>
-      <hr>
+     <hr>
+<h2>Forma de pago</h2>
+
+<!-- Modal de forma de pago -->
+<button type="button" id="modalPagoLabel" class="btn btn-primary" data-toggle="modal" data-target="#modalPago">
+  Seleccionar Forma de Pago
+</button>
+
+<div class="modal fade" id="modalPago" tabindex="-1" role="dialog" aria-labelledby="modalPagoLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalPagoLabel">Seleccionar Forma de Pago</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="tarjetaCredito" name="formaPago" value="tarjeta">
+          <label class="form-check-label" for="tarjetaCredito">Tarjeta de Crédito</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="transferenciaBancaria" name="formaPago" value="transferencia">
+          <label class="form-check-label" for="transferenciaBancaria">Transferencia Bancaria</label>
+        </div>
+        
+        <div id="datosTarjeta" style="display: none;">
+          <h5>Datos de Tarjeta de Crédito  <span class="input-group-addon"><i class="fa fa-credit-card" id="cardlogo" style="color:purple;font-size:1rem;"></i></span></h5>
+          <div class="form-group">
+            <label for="numeroTarjeta">Número de Tarjeta</label>
+            <input type="text" class="form-control" id="numeroTarjeta" placeholder="XXXX-XXXX-XXXX-XXXX"
+            autocomplete="cc-number">           
+            <div id="errorRequisitoNum" style="display: none; color: red;">
+              Numero de tarjeta invalida.
+            </div>
+            
+          </div>
+          <div class="form-group">
+            <label for="codigoTarjeta">Codigo de seg.</label>
+            <input type="text" class="form-control" id="codigoTarjeta" placeholder="CVC">
+            <div id="errorRequisitoCod" style="display: none; color: red;">
+              codigo de seguridad inválido.
+            </div>
+          </div>
+          <div id="fechaVencimiento" style="display: none;">
+            <div class="form-group">
+              <label for="fechaVencimiento">Vencimiento MM/AA</label>
+              <input type="date" class="form-control" id="fechaVencimiento" placeholder="MM/AA">
+              <div id="errorRequisitoVenci"  style="display: none; color: red;">
+                Este campo no cumple con los requisitos mínimos.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="datosTransferencia" style="display: none;">
+          <h5>Datos de Transferencia Bancaria</h5>
+          <div class="form-group">
+            <label for "numeroCuenta">Número de Cuenta:</label>
+            <input type="text" class="form-control" id="numeroCuenta">
+            <div id="errorRequisitoCuenta" style="display: none; color: red;">
+             Numero de cuenta invalido.
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" id="Guardar" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</main>
+<br>
 
       <div class="btnBuy d-flex justify-content-end w-100 ">
         <button class="btn btn-outline-primary">COMPRAR</button>
