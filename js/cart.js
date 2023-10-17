@@ -108,6 +108,142 @@ function updateTotal() {
     }
 }
 
+//Modal de forma de pago
+document.addEventListener("DOMContentLoaded", function () {
+    const tarjetaCredito = document.getElementById("tarjetaCredito");
+    const transferenciaBancaria = document.getElementById("transferenciaBancaria");
+    const datosTarjeta = document.getElementById("datosTarjeta");
+    const datosTransferencia = document.getElementById("datosTransferencia");
+    const fechaVencimiento = document.getElementById("fechaVencimiento");
+    const botonGuardar = document.querySelector("#modalPago .btn-primary");
+    const modalPagoLabel = document.getElementById("modalPagoLabel"); // Cambia el ID a modalPagoLabel
+
+
+    function mostrarCamposFormaPago() {
+        if (tarjetaCredito.checked) {
+            datosTarjeta.style.display = "block";
+            datosTransferencia.style.display = "none";
+            fechaVencimiento.style.display = "block";
+            formaDePagoSeleccionada = "tarjeta"; // Actualiza la variable          
+        } else if (transferenciaBancaria.checked) {
+            datosTarjeta.style.display = "none";
+            datosTransferencia.style.display = "block";
+            fechaVencimiento.style.display = "none";
+            formaDePagoSeleccionada = "transferencia"; // Actualiza la variable
+        }
+    }
+
+    tarjetaCredito.addEventListener("change", mostrarCamposFormaPago);
+    transferenciaBancaria.addEventListener("change", mostrarCamposFormaPago);
+    botonGuardar.addEventListener("click", function () {
+        if (formaDePagoSeleccionada === "tarjeta") {
+            console.log("Se seleccionó la forma de pago: Tarjeta de Crédito");
+            modalPagoLabel.textContent = "Tarjeta de Crédito"; // Actualiza el texto
+        } else if (formaDePagoSeleccionada === "transferencia") {
+            console.log("Se seleccionó la forma de pago: Transferencia Bancaria");
+            modalPagoLabel.textContent = "Transferencia Bancaria"; // Actualiza el texto
+        } 
+    });
+
+    
+});
+
+$('#modalPago').on('shown.bs.modal', function() {
+    // Al cambiar la opción de forma de pago
+    $('input[name="formaPago"]').change(function() {
+      const formaPago = this.value;
+      const datosTarjeta = document.getElementById("datosTarjeta");
+      const datosTransferencia = document.getElementById("datosTransferencia");
+      
+      if (formaPago === "tarjeta") {
+        datosTarjeta.style.display = "block";
+        datosTransferencia.style.display = "none";
+      } else if (formaPago === "transferencia") {
+        datosTarjeta.style.display = "none";
+        datosTransferencia.style.display = "block";
+      }
+    });
+   
+  });
+
+  // Al hacer clic en el botón "Guardar" dentro del modal de forma de pago
+  $('#modalPago').on('click', '.btn-primary', function() {
+    const formaPago = document.querySelector('input[name="formaPago"]:checked');
+  
+
+    if (formaPago) {
+        const formaPagoSeleccionada = formaPago.value;
+        if (formaPagoSeleccionada === "tarjeta") {
+            const numeroTarjeta = document.getElementById("numeroTarjeta");
+            const codigoTarjeta = document.getElementById("codigoTarjeta");
+            const fechaVencimiento = document.getElementById("fechaVencimiento");
+            const errorMensaje = document.getElementById("errorRequisitoNum");
+            const errorMensajeCod = document.getElementById("errorRequisitoCod");
+            const errorMensajeVenci = document.getElementById ("errorRequisitoVenci")
+           const errorMensajeCuenta = document.getElementById("errorRequisitoCuenta")
+    
+                //Marca en rojo los campos vacíos
+            if (numeroTarjeta.value === "" || numeroTarjeta.value.length < 19 || !/^[0-9-]+$/.test(numeroTarjeta.value)) 
+                {
+                numeroTarjeta.classList.add("error");
+                errorMensaje.style.display = "block";
+                    return;
+            }else{
+                numeroTarjeta.classList.remove("error");
+                errorMensaje.style.display = "none"; 
+                
+             }
+            if (codigoTarjeta.value === "" || codigoTarjeta.value.length < 3 || !/^\d+$/.test(codigoTarjeta.value))  {
+                codigoTarjeta.classList.add("error");
+                errorMensajeCod.style.display = "block";
+                return;
+              }else{
+                  codigoTarjeta.classList.remove("error");
+                  errorMensajeCod.style.display = "none";
+              } 
+              
+              if (fechaVencimiento.value === "") {
+                fechaVencimiento.classList.add("error");
+                errorMensajeVenci.style.display = "block";
+                return;
+            } else {
+                fechaVencimiento.classList.remove("error");
+                errorMensajeVenci.style.display = "none";
+            }
+
+      } else if (formaPagoSeleccionada === "transferencia") {
+        const numeroCuenta = document.getElementById("numeroCuenta");
+
+        if (numeroCuenta.value === "" || !/^\d+$/.test(numeroCuenta.value) || numeroCuenta.value.length < 20) {
+            numeroCuenta.classList.add("error");
+            errorRequisitoCuenta.style.display = "block";
+          return;
+        }else{
+            numeroCuenta.classList.remove("error")
+            errorRequisitoCuenta.style.display = "none";
+        }
+      }
+    }
+    $('#modalPago').modal('hide');
+});
+
+
+// Guión cada 4 digitos y limita la cantidad de caracteres
+const numeroTarjeta = document.getElementById("numeroTarjeta");
+
+numeroTarjeta.addEventListener("input", function () {
+  
+    let formattedValue = numeroTarjeta.value.replace(/-/g, "");
+    if (formattedValue.length > 16) {
+        formattedValue = formattedValue.slice(0, 16);
+    }
+    const groups = [];
+    for (let i = 0; i < formattedValue.length; i += 4) {
+        groups.push(formattedValue.slice(i, i + 4));
+    }
+    numeroTarjeta.value = groups.join('-');
+});
+
 //Muestro el carrito luego de que cargue el DOM.
 document.addEventListener('DOMContentLoaded', function () {
     showCart();
