@@ -251,12 +251,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 //Limito la cantidad de numeros que se ingresan en los inputs de métodos de pago.
-const inputCardNumber = document.getElementById('numeroTarjeta');
 const inputSecurityCode = document.getElementById('codigoTarjeta');
-const inputTransfer = document.getElementById('numeroCuenta');
 inputSecurityCode.addEventListener('input', (e) => { limitLength(e, 4) });
-inputCardNumber.addEventListener('input', (e) => { limitLength(e, 16) });
-inputTransfer.addEventListener('input', (e) => { limitLength(e, 16) });
 
 function limitLength(e, length) {
     if (e.target.value.length > length) {
