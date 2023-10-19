@@ -176,10 +176,9 @@ $('#modalPago').on('click', '.btn-primary', function () {
         if (formaPagoSeleccionada === "tarjeta") {
             const numeroTarjeta = document.getElementById("numeroTarjeta");
             const codigoTarjeta = document.getElementById("codigoTarjeta");
-            const fechaVencimiento = document.getElementById("fechaVencimiento");
+            const errorFecha = document.getElementById("errorFecha")
             const errorMensaje = document.getElementById("errorRequisitoNum");
             const errorMensajeCod = document.getElementById("errorRequisitoCod");
-            const errorMensajeVenci = document.getElementById("errorRequisitoVenci")
             const errorMensajeCuenta = document.getElementById("errorRequisitoCuenta")
 
             //Marca en rojo los campos vacíos
@@ -201,14 +200,11 @@ $('#modalPago').on('click', '.btn-primary', function () {
                 errorMensajeCod.style.display = "none";
             }
 
-            if (fechaVencimiento.value === "") {
-                fechaVencimiento.classList.add("error");
-                errorMensajeVenci.style.display = "block";
-                return;
-            } else {
-                fechaVencimiento.classList.remove("error");
-                errorMensajeVenci.style.display = "none";
-            }
+             if (!inputFecha) {
+                errorFecha.style.display = "block";
+              } else {
+                errorFecha.style.display = "none";
+              }
 
         } else if (formaPagoSeleccionada === "transferencia") {
             const numeroCuenta = document.getElementById("numeroCuenta");
