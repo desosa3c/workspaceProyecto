@@ -201,14 +201,16 @@
                   <label class="form-check-label" for="tarjetaCredito">Tarjeta de Crédito <i class="fa fa-credit-card"
                       id="cardlogo"></i></label>
                 </div>
+                <hr>
                 <div class="form-check">
                   <input type="radio" class="form-check-input" id="transferenciaBancaria" name="formaPago"
                     value="transferencia">
                   <label class="form-check-label" for="transferenciaBancaria">Transferencia Bancaria <i
                       class='bx bx-transfer'></i></label>
                 </div>
-
-                <div id="datosTarjeta" style="display: none;">
+                <hr>
+                <!-- Tarjeta de crédito  -->
+                <div id="datosTarjeta" style="display: none;" class="p-3">
                   <h5>Datos de Tarjeta de Crédito <span class="input-group-addon"></span></h5>
                   <div class="form-group">
                     <label for="numeroTarjeta">Número de Tarjeta</label>
@@ -236,11 +238,11 @@
                   </div>
                 </div>
               </div>
-
-              <div id="datosTransferencia" style="display: none;">
+              <!-- Transferencia -->
+              <div id="datosTransferencia" style="display: none;" class="p-3">
                 <h5>Datos de Transferencia Bancaria</h5>
                 <div class="form-group">
-                  <label for "numeroCuenta">Número de Cuenta:</label>
+                  <label for="numeroCuenta">Número de Cuenta:</label>
                   <input type="text" class="form-control" id="numeroCuenta">
                   <div id="errorRequisitoCuenta" style="display: none; color: red;">
                     Numero de cuenta invalido.
@@ -248,11 +250,12 @@
 
                 </div>
               </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="Guardar" class="btn btn-primary">Guardar</button>
+              </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button type="button" id="Guardar" class="btn btn-primary">Guardar</button>
-            </div>
+
           </div>
         </div>
   </main>
