@@ -88,7 +88,7 @@ function updateTotal() {
     const cart = checkCart();
     if (cart !== null) {
         let total = 0;
-        let currency ="USD";
+        let currency = "USD";
         cart.forEach(item => {
             let i = 0;
             while (item.unitCost != arraysubtotal[i]) {
@@ -142,34 +142,34 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (formaDePagoSeleccionada === "transferencia") {
             console.log("Se seleccionó la forma de pago: Transferencia Bancaria");
             modalPagoLabel.textContent = "Transferencia Bancaria"; // Actualiza el texto
-        } 
+        }
     });
 
-    
+
 });
 
-$('#modalPago').on('shown.bs.modal', function() {
+$('#modalPago').on('shown.bs.modal', function () {
     // Al cambiar la opción de forma de pago
-    $('input[name="formaPago"]').change(function() {
-      const formaPago = this.value;
-      const datosTarjeta = document.getElementById("datosTarjeta");
-      const datosTransferencia = document.getElementById("datosTransferencia");
-      
-      if (formaPago === "tarjeta") {
-        datosTarjeta.style.display = "block";
-        datosTransferencia.style.display = "none";
-      } else if (formaPago === "transferencia") {
-        datosTarjeta.style.display = "none";
-        datosTransferencia.style.display = "block";
-      }
-    });
-   
-  });
+    $('input[name="formaPago"]').change(function () {
+        const formaPago = this.value;
+        const datosTarjeta = document.getElementById("datosTarjeta");
+        const datosTransferencia = document.getElementById("datosTransferencia");
 
-  // Al hacer clic en el botón "Guardar" dentro del modal de forma de pago
-  $('#modalPago').on('click', '.btn-primary', function() {
+        if (formaPago === "tarjeta") {
+            datosTarjeta.style.display = "block";
+            datosTransferencia.style.display = "none";
+        } else if (formaPago === "transferencia") {
+            datosTarjeta.style.display = "none";
+            datosTransferencia.style.display = "block";
+        }
+    });
+
+});
+
+// Al hacer clic en el botón "Guardar" dentro del modal de forma de pago
+$('#modalPago').on('click', '.btn-primary', function () {
     const formaPago = document.querySelector('input[name="formaPago"]:checked');
-  
+
 
     if (formaPago) {
         const formaPagoSeleccionada = formaPago.value;
@@ -179,30 +179,29 @@ $('#modalPago').on('shown.bs.modal', function() {
             const fechaVencimiento = document.getElementById("fechaVencimiento");
             const errorMensaje = document.getElementById("errorRequisitoNum");
             const errorMensajeCod = document.getElementById("errorRequisitoCod");
-            const errorMensajeVenci = document.getElementById ("errorRequisitoVenci")
-           const errorMensajeCuenta = document.getElementById("errorRequisitoCuenta")
-    
-                //Marca en rojo los campos vacíos
-            if (numeroTarjeta.value === "" || numeroTarjeta.value.length < 19 || !/^[0-9-]+$/.test(numeroTarjeta.value)) 
-                {
+            const errorMensajeVenci = document.getElementById("errorRequisitoVenci")
+            const errorMensajeCuenta = document.getElementById("errorRequisitoCuenta")
+
+            //Marca en rojo los campos vacíos
+            if (numeroTarjeta.value === "" || numeroTarjeta.value.length < 19 || !/^[0-9-]+$/.test(numeroTarjeta.value)) {
                 numeroTarjeta.classList.add("error");
                 errorMensaje.style.display = "block";
-                    return;
-            }else{
+                return;
+            } else {
                 numeroTarjeta.classList.remove("error");
-                errorMensaje.style.display = "none"; 
-                
-             }
-            if (codigoTarjeta.value === "" || codigoTarjeta.value.length < 3 || !/^\d+$/.test(codigoTarjeta.value))  {
+                errorMensaje.style.display = "none";
+
+            }
+            if (codigoTarjeta.value === "" || codigoTarjeta.value.length < 3 || !/^\d+$/.test(codigoTarjeta.value)) {
                 codigoTarjeta.classList.add("error");
                 errorMensajeCod.style.display = "block";
                 return;
-              }else{
-                  codigoTarjeta.classList.remove("error");
-                  errorMensajeCod.style.display = "none";
-              } 
-              
-              if (fechaVencimiento.value === "") {
+            } else {
+                codigoTarjeta.classList.remove("error");
+                errorMensajeCod.style.display = "none";
+            }
+
+            if (fechaVencimiento.value === "") {
                 fechaVencimiento.classList.add("error");
                 errorMensajeVenci.style.display = "block";
                 return;
@@ -211,18 +210,18 @@ $('#modalPago').on('shown.bs.modal', function() {
                 errorMensajeVenci.style.display = "none";
             }
 
-      } else if (formaPagoSeleccionada === "transferencia") {
-        const numeroCuenta = document.getElementById("numeroCuenta");
+        } else if (formaPagoSeleccionada === "transferencia") {
+            const numeroCuenta = document.getElementById("numeroCuenta");
 
-        if (numeroCuenta.value === "" || !/^\d+$/.test(numeroCuenta.value) || numeroCuenta.value.length < 20) {
-            numeroCuenta.classList.add("error");
-            errorRequisitoCuenta.style.display = "block";
-          return;
-        }else{
-            numeroCuenta.classList.remove("error")
-            errorRequisitoCuenta.style.display = "none";
+            if (numeroCuenta.value === "" || !/^\d+$/.test(numeroCuenta.value) || numeroCuenta.value.length < 20) {
+                numeroCuenta.classList.add("error");
+                errorRequisitoCuenta.style.display = "block";
+                return;
+            } else {
+                numeroCuenta.classList.remove("error")
+                errorRequisitoCuenta.style.display = "none";
+            }
         }
-      }
     }
     $('#modalPago').modal('hide');
 });
@@ -232,7 +231,7 @@ $('#modalPago').on('shown.bs.modal', function() {
 const numeroTarjeta = document.getElementById("numeroTarjeta");
 
 numeroTarjeta.addEventListener("input", function () {
-  
+
     let formattedValue = numeroTarjeta.value.replace(/-/g, "");
     if (formattedValue.length > 16) {
         formattedValue = formattedValue.slice(0, 16);
@@ -250,3 +249,18 @@ document.addEventListener('DOMContentLoaded', function () {
     updateTotal();
 });
 
+
+//Limito la cantidad de numeros que se ingresan en los inputs de métodos de pago.
+const inputCardNumber = document.getElementById('numeroTarjeta');
+const inputSecurityCode = document.getElementById('codigoTarjeta');
+const inputTransfer = document.getElementById('numeroCuenta');
+inputSecurityCode.addEventListener('input', (e) => { limitLength(e, 4) });
+inputCardNumber.addEventListener('input', (e) => { limitLength(e, 16) });
+inputTransfer.addEventListener('input', (e) => { limitLength(e, 16) });
+
+function limitLength(e, length) {
+    if (e.target.value.length > length) {
+        e.target.value = e.target.value.slice(0, length);
+    }
+
+}
