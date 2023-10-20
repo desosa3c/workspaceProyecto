@@ -116,32 +116,60 @@ document.addEventListener("DOMContentLoaded", function () {
     const datosTransferencia = document.getElementById("datosTransferencia");
     const fechaVencimiento = document.getElementById("fechaVencimiento");
     const botonGuardar = document.querySelector("#modalPago .btn-primary");
-    const modalPagoLabel = document.getElementById("modalPagoLabel"); // Cambia el ID a modalPagoLabel
-
+    const modalPagoLabel = document.getElementById("modalPagoLabel");
+    let formaDePagoSeleccionada = "";
 
     function mostrarCamposFormaPago() {
         if (tarjetaCredito.checked) {
             datosTarjeta.style.display = "block";
             datosTransferencia.style.display = "none";
             fechaVencimiento.style.display = "block";
-            formaDePagoSeleccionada = "tarjeta"; // Actualiza la variable          
+            formaDePagoSeleccionada = "tarjeta";
         } else if (transferenciaBancaria.checked) {
             datosTarjeta.style.display = "none";
             datosTransferencia.style.display = "block";
             fechaVencimiento.style.display = "none";
-            formaDePagoSeleccionada = "transferencia"; // Actualiza la variable
+            formaDePagoSeleccionada = "transferencia";
         }
     }
 
     tarjetaCredito.addEventListener("change", mostrarCamposFormaPago);
     transferenciaBancaria.addEventListener("change", mostrarCamposFormaPago);
     botonGuardar.addEventListener("click", function () {
+        let validacionCorrecta = true;
         if (formaDePagoSeleccionada === "tarjeta") {
-            console.log("Se seleccionó la forma de pago: Tarjeta de Crédito");
-            modalPagoLabel.textContent = "Tarjeta de Crédito"; // Actualiza el texto
+            const numeroTarjeta = document.getElementById("numeroTarjeta");
+            const errorMensaje = document.getElementById("errorRequisitoNum");
+            if (numeroTarjeta.value === "" || numeroTarjeta.value.length < 19 || !/^[0-9-]+$/.test(numeroTarjeta.value)) {
+                numeroTarjeta.classList.add("error");
+                errorMensaje.style.display = "block";
+                validacionCorrecta = false;
+            } else {
+                numeroTarjeta.classList.remove("error");
+                errorMensaje.style.display = "none";
+            }
         } else if (formaDePagoSeleccionada === "transferencia") {
-            console.log("Se seleccionó la forma de pago: Transferencia Bancaria");
-            modalPagoLabel.textContent = "Transferencia Bancaria"; // Actualiza el texto
+            const numeroCuenta = document.getElementById("numeroCuenta");
+            const errorRequisitoCuenta = document.getElementById("errorRequisitoCuenta");
+            if (numeroCuenta.value === "" || !/^\d+$/.test(numeroCuenta.value) || numeroCuenta.value.length < 20) {
+                numeroCuenta.classList.add("error");
+                errorRequisitoCuenta.style.display = "block";
+                validacionCorrecta = false;
+            } else {
+                numeroCuenta.classList.remove("error");
+                errorRequisitoCuenta.style.display = "none";
+            }
+        }
+
+        // actualiza el texto solo si todas las validaciones son correctas
+        if (validacionCorrecta) {
+            if (formaDePagoSeleccionada === "tarjeta") {
+                console.log("Se seleccionó la forma de pago: Tarjeta de Crédito");
+                modalPagoLabel.textContent = "Tarjeta de Crédito";
+            } else if (formaDePagoSeleccionada === "transferencia") {
+                console.log("Se seleccionó la forma de pago: Transferencia Bancaria");
+                modalPagoLabel.textContent = "Transferencia Bancaria";
+            }
         }
     });
 
@@ -256,3 +284,81 @@ function limitLength(e, length) {
     }
 
 }
+
+
+//validaciones para comprar
+function validarTipoEnvio() {
+    const premium = document.getElementById("envioPremium").checked;
+    const express = document.getElementById("envioExpress").checked;
+    const standard = document.getElementById("envioStandard").checked;
+    const texto = document.getElementById("textoTipoEnvio")
+
+    if ((premium && !express && !standard) || (!premium && express && !standard)  || (!premium && !express && standard) ) {
+        texto.innerHTML = " ";
+        return true;
+    }else {texto.classList.add("text-danger")}
+}
+  function validarDatosEnvio() {
+        var direccion = document.getElementById('direccion').value;
+        var esquina = document.getElementById('esquina').value;
+        var barrio = document.getElementById('barrio').value;
+
+        if (direccion === ''|| esquina === '' || barrio === ''){
+            const error = document.getElementById("validacionDatos")
+            error.classList.add("was-validated");
+            return false 
+        }else{ 
+            return true     
+        }}
+
+    function validarTipoCompra(){ 
+    const modal = document.getElementById("modalPagoLabel")
+    if (modal.textContent.trim() === "Seleccionar Forma de Pago"){
+        appendAlert('Debe seleccionar una forma de pago.', 'danger')
+        return false      
+    } else{ return true
+    }
+    } 
+
+    function validarCantidad() {
+        const cart = checkCart();
+        if (cart !== null) {
+            for (let i = 0; i < cart.length; i++) {
+                let btn = document.getElementById(`num-cant-prod-${i}`);
+                if (btn.value <= 0) {
+                    appendAlert('No es posible completar su compra, revise su carrito.', 'danger')
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //estilos d las alertas 
+  const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+  const appendAlert = (message, type) => {
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    '</div>'
+  ].join('')
+
+  alertPlaceholder.append(wrapper)
+}
+   
+//validacion final con la confirmacion de compra 
+        function validarCompra() { 
+         validarTipoEnvio()
+         validarDatosEnvio()
+         validarCantidad()
+         validarDatosEnvio()
+         validarTipoCompra()
+         if (validarTipoEnvio() && validarDatosEnvio () && validarTipoCompra() && validarCantidad()) {
+            appendAlert('¡Has comprado con éxito!', 'success')
+        } else{ appendAlert('Compra invalida, rellene todos los campos. ', 'danger')
+    }}
+    
