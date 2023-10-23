@@ -2,6 +2,7 @@ const cartBodyContainer = document.getElementById('bodyCart');
 let arraysubtotal = [];
 let arrayindice = [];
 let arraytotal = [];
+let envio_porcentaje = 0;
 function setProductID(id) {
     localStorage.setItem('selectedProductID', id);
     window.location.href = 'product-info.html';
@@ -70,7 +71,10 @@ function showCart() {
         console.log(i);
         btn.addEventListener("input", () => {
             let tb = document.getElementById(`subtotal-${i}`);
-            let p = document.getElementById("total_txt")
+            let p = document.getElementById("total_txt_2")
+
+            let costo_envioElement = document.getElementById('costo_envio');
+            let totalElement = document.getElementById('total_txt');
 
             let cantidad = arraysubtotal[i] * (btn.value);
             arraytotal[i] = cantidad;
@@ -78,8 +82,15 @@ function showCart() {
             arraytotal.forEach(element => {
                 total += element;
             });
+            
+            let costo_envio = total*envio_porcentaje;
+            let totalyenvio = costo_envio+total;
             p.textContent = `${cart[i].currency} ${total}`;
             tb.textContent = `${cart[i].currency} ${cantidad}`;
+
+            totalElement.textContent = `USD ${totalyenvio}`;
+            costo_envioElement.textContent = `USD ${costo_envio}`;
+            
         });
     }
 }
@@ -103,8 +114,19 @@ function updateTotal() {
             console.log(total);
             currency = item.currency;
         });
-        const totalElement = document.getElementById('total_txt');
-        totalElement.textContent = `${currency} ${total}`;
+        if(envio_porcentaje == 0){
+            alert("coloca una forma de envio");
+        }else{
+            let totalsinenvioElement = document.getElementById('total_txt_2');
+            let costo_envioElement = document.getElementById('costo_envio');
+            let totalElement = document.getElementById('total_txt');
+            let costo_envio = total*envio_porcentaje;
+            let totalyenvio = costo_envio+total;
+
+            totalElement.textContent = `${currency} ${totalyenvio}`;
+            costo_envioElement.textContent = `${currency} ${costo_envio}`;
+            totalsinenvioElement.textContent = `${currency} ${total}`;
+        }
     }
 }
 
@@ -118,6 +140,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const botonGuardar = document.querySelector("#modalPago .btn-primary");
     const modalPagoLabel = document.getElementById("modalPagoLabel");
     let formaDePagoSeleccionada = "";
+
+    envioPremium.addEventListener("input", ()=>{
+        envio_porcentaje = 0.15;
+        updateTotal();
+    });
+
+    envioExpress.addEventListener("input", ()=>{
+        envio_porcentaje = 0.07;
+        updateTotal();
+    });
+
+    envioStandard.addEventListener("input", ()=>{
+        envio_porcentaje = 0.05;
+        updateTotal();
+    });
 
     function mostrarCamposFormaPago() {
         if (tarjetaCredito.checked) {
