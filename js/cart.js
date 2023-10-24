@@ -114,11 +114,12 @@ function updateTotal() {
             console.log(total);
             currency = item.currency;
         });
-        if(envio_porcentaje == 0){
+        if(envio_porcentaje !== 0){
             let totalsinenvioElement = document.getElementById('total_txt_2');
             let costo_envioElement = document.getElementById('costo_envio');
             let totalElement = document.getElementById('total_txt');
             let costo_envio = total*envio_porcentaje;
+            console.log(costo_envio);
             let totalyenvio = costo_envio+total;
 
             totalElement.textContent = `${currency} ${totalyenvio}`;
