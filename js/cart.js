@@ -201,12 +201,20 @@ document.addEventListener("DOMContentLoaded", function () {
             if (formaDePagoSeleccionada === "tarjeta") {
                 console.log("Se seleccionó la forma de pago: Tarjeta de Crédito");
                 modalPagoLabel.textContent = "Tarjeta de Crédito";
+                const cerrar = document.getElementById("Cerrar")
+                cerrar.click()
+                appendAlert('Método de pago seleccionado aprobado', 'success')
             } else if (formaDePagoSeleccionada === "transferencia") {
                 console.log("Se seleccionó la forma de pago: Transferencia Bancaria");
                 modalPagoLabel.textContent = "Transferencia Bancaria";
+                const cerrar = document.getElementById("Cerrar")
+                cerrar.click()
+                appendAlert('Método de pago seleccionado aprobado', 'success')
             }
         }
     });
+
+  
 
 
 });
