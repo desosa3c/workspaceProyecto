@@ -115,8 +115,6 @@ function updateTotal() {
             currency = item.currency;
         });
         if(envio_porcentaje == 0){
-            alert("coloca una forma de envio");
-        }else{
             let totalsinenvioElement = document.getElementById('total_txt_2');
             let costo_envioElement = document.getElementById('costo_envio');
             let totalElement = document.getElementById('total_txt');
