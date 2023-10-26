@@ -10,17 +10,24 @@ function setProductID(id) {
 
 function createCartItem(article, indice) {
     const body = document.createElement('tr');
+    let dollarCost;
+    if (article.currency === "UYU") {
+        dollarCost = article.unitCost / 40;
+    } else {
+        dollarCost = article.unitCost;
+    };
+        
     body.innerHTML = `<td class="col-2">
         <img class="img-fluid" src=${article.image} alt="producto" onclick="setProductID(${article.id})">
     </td>
     <td onclick="setProductID(${article.id})"> ${article.name} </td> 
-    <td>${article.currency} ${article.unitCost}</td>
+    <td>USD ${dollarCost}</td>
     <td>
         <div class="cantidad w-25">
             <input type="number" class="amount" name="amount" value="${article.count}" min="1" max="100" id="num-cant-prod-${indice}"/>
         </div>
     </td>
-    <td id="subtotal-${indice}">${article.currency} ${article.unitCost * article.count} </td>
+    <td id="subtotal-${indice}">USD ${dollarCost * article.count} </td>
     <td><button class="btn btn-primary" onclick="removeItem(${indice})">ELIMINAR</button></td>`;
     return body;
 }
@@ -99,20 +106,24 @@ function updateTotal() {
     const cart = checkCart();
     if (cart !== null) {
         let total = 0;
-        let currency = "USD";
+        let dollarCost;
         cart.forEach(item => {
             let i = 0;
+            if (item.currency === "UYU") {
+                dollarCost = item.unitCost / 40;
+            } else {
+                dollarCost = item.unitCost;
+            };
             while (item.unitCost != arraysubtotal[i]) {
                 i++;
             }
             if (i < arraysubtotal.length) {
                 let btn = document.getElementById(`num-cant-prod-${i}`);
-                total += item.unitCost * btn.value;
+                total += dollarCost * btn.value;
             } else {
-                total += item.unitCost;
+                total += dollarCost;
             }
             console.log(total);
-            currency = item.currency;
         });
         if(envio_porcentaje !== 0){
             let totalsinenvioElement = document.getElementById('total_txt_2');
@@ -122,9 +133,9 @@ function updateTotal() {
             console.log(costo_envio);
             let totalyenvio = costo_envio+total;
 
-            totalElement.textContent = `${currency} ${totalyenvio}`;
-            costo_envioElement.textContent = `${currency} ${costo_envio}`;
-            totalsinenvioElement.textContent = `${currency} ${total}`;
+            totalElement.textContent = `USD ${totalyenvio}`;
+            costo_envioElement.textContent = `USD ${costo_envio}`;
+            totalsinenvioElement.textContent = `USD ${total}`;
         }
     }
 }
