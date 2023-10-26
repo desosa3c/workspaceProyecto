@@ -8,15 +8,9 @@ function setProductID(id) {
     window.location.href = 'product-info.html';
 }
 
-function createCartItem(article, indice) {
+function createCartItem(article, indice, dollarCost) {
     const body = document.createElement('tr');
-    let dollarCost;
-    if (article.currency === "UYU") {
-        dollarCost = article.unitCost / 40;
-    } else {
-        dollarCost = article.unitCost;
-    };
-        
+
     body.innerHTML = `<td class="col-2">
         <img class="img-fluid" src=${article.image} alt="producto" onclick="setProductID(${article.id})">
     </td>
@@ -63,13 +57,21 @@ function showCart() {
         arrayindice = [];
         arraysubtotal = [];
         arraytotal = [];
+        let dollarCost;
         for (let i = 0; i < largo; i++) {
+            if (cart[i].currency === "UYU") {
+                dollarCost = cart[i].unitCost / 40;
+            } else {
+                dollarCost = cart[i].unitCost;
+            };
             arrayindice.push(i);
-            arraysubtotal.push(cart[i].unitCost);
-            arraytotal.push(cart[i].unitCost);
-            const cartItem = createCartItem(cart[i], i);
+            console.log(dollarCost);
+            arraysubtotal.push(dollarCost);
+            arraytotal.push(dollarCost);
+            const cartItem = createCartItem(cart[i], i, dollarCost);
             cartBodyContainer.appendChild(cartItem); //agrega la fila al contenedor.
         };
+        console.log(arraysubtotal);
     }
     let largo = arrayindice.length;
 
@@ -86,18 +88,19 @@ function showCart() {
             let cantidad = arraysubtotal[i] * (btn.value);
             arraytotal[i] = cantidad;
             let total = 0;
+            console.log(arraytotal);
             arraytotal.forEach(element => {
                 total += element;
             });
-            
-            let costo_envio = total*envio_porcentaje;
-            let totalyenvio = costo_envio+total;
+
+            let costo_envio = total * envio_porcentaje;
+            let totalyenvio = costo_envio + total;
             p.textContent = `${cart[i].currency} ${total}`;
             tb.textContent = `${cart[i].currency} ${cantidad}`;
 
             totalElement.textContent = `USD ${totalyenvio}`;
             costo_envioElement.textContent = `USD ${costo_envio}`;
-            
+
         });
     }
 }
@@ -114,7 +117,7 @@ function updateTotal() {
             } else {
                 dollarCost = item.unitCost;
             };
-            while (item.unitCost != arraysubtotal[i]) {
+            while (dollarCost != arraysubtotal[i]) {
                 i++;
             }
             if (i < arraysubtotal.length) {
@@ -125,13 +128,13 @@ function updateTotal() {
             }
             console.log(total);
         });
-        if(envio_porcentaje !== 0){
+        if (envio_porcentaje !== 0) {
             let totalsinenvioElement = document.getElementById('total_txt_2');
             let costo_envioElement = document.getElementById('costo_envio');
             let totalElement = document.getElementById('total_txt');
-            let costo_envio = total*envio_porcentaje;
+            let costo_envio = total * envio_porcentaje;
             console.log(costo_envio);
-            let totalyenvio = costo_envio+total;
+            let totalyenvio = costo_envio + total;
 
             totalElement.textContent = `USD ${totalyenvio}`;
             costo_envioElement.textContent = `USD ${costo_envio}`;
@@ -151,17 +154,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const modalPagoLabel = document.getElementById("modalPagoLabel");
     let formaDePagoSeleccionada = "";
 
-    envioPremium.addEventListener("input", ()=>{
+    envioPremium.addEventListener("input", () => {
         envio_porcentaje = 0.15;
         updateTotal();
     });
 
-    envioExpress.addEventListener("input", ()=>{
+    envioExpress.addEventListener("input", () => {
         envio_porcentaje = 0.07;
         updateTotal();
     });
 
-    envioStandard.addEventListener("input", ()=>{
+    envioStandard.addEventListener("input", () => {
         envio_porcentaje = 0.05;
         updateTotal();
     });
@@ -226,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-  
+
 
 
 });
@@ -283,11 +286,11 @@ $('#modalPago').on('click', '.btn-primary', function () {
                 errorMensajeCod.style.display = "none";
             }
 
-             if (!inputFecha) {
+            if (!inputFecha) {
                 errorFecha.style.display = "block";
-              } else {
+            } else {
                 errorFecha.style.display = "none";
-              }
+            }
 
         } else if (formaPagoSeleccionada === "transferencia") {
             const numeroCuenta = document.getElementById("numeroCuenta");
@@ -348,72 +351,75 @@ function validarTipoEnvio() {
     const standard = document.getElementById("envioStandard").checked;
     const texto = document.getElementById("textoTipoEnvio")
 
-    if ((premium && !express && !standard) || (!premium && express && !standard)  || (!premium && !express && standard) ) {
+    if ((premium && !express && !standard) || (!premium && express && !standard) || (!premium && !express && standard)) {
         texto.innerHTML = " ";
         return true;
-    }else {texto.classList.add("text-danger")}
+    } else { texto.classList.add("text-danger") }
 }
-  function validarDatosEnvio() {
-        var direccion = document.getElementById('direccion').value;
-        var esquina = document.getElementById('esquina').value;
-        var barrio = document.getElementById('barrio').value;
+function validarDatosEnvio() {
+    var direccion = document.getElementById('direccion').value;
+    var esquina = document.getElementById('esquina').value;
+    var barrio = document.getElementById('barrio').value;
 
-        if (direccion === ''|| esquina === '' || barrio === ''){
-            const error = document.getElementById("validacionDatos")
-            error.classList.add("was-validated");
-            return false 
-        }else{ 
-            return true     
-        }}
+    if (direccion === '' || esquina === '' || barrio === '') {
+        const error = document.getElementById("validacionDatos")
+        error.classList.add("was-validated");
+        return false
+    } else {
+        return true
+    }
+}
 
-    function validarTipoCompra(){ 
+function validarTipoCompra() {
     const modal = document.getElementById("modalPagoLabel")
-    if (modal.textContent.trim() === "Seleccionar Forma de Pago"){
+    if (modal.textContent.trim() === "Seleccionar Forma de Pago") {
         appendAlert('Debe seleccionar una forma de pago.', 'danger')
-        return false      
-    } else{ return true
+        return false
+    } else {
+        return true
     }
-    } 
-
-    function validarCantidad() {
-        const cart = checkCart();
-        if (cart !== null) {
-            for (let i = 0; i < cart.length; i++) {
-                let btn = document.getElementById(`num-cant-prod-${i}`);
-                if (btn.value <= 0) {
-                    appendAlert('No es posible completar su compra, revise su carrito.', 'danger')
-                    return false;
-                }
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    //estilos d las alertas 
-  const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-  const appendAlert = (message, type) => {
-  const wrapper = document.createElement('div')
-  wrapper.innerHTML = [
-    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-    `   <div>${message}</div>`,
-    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-    '</div>'
-  ].join('')
-
-  alertPlaceholder.append(wrapper)
 }
-   
+
+function validarCantidad() {
+    const cart = checkCart();
+    if (cart !== null) {
+        for (let i = 0; i < cart.length; i++) {
+            let btn = document.getElementById(`num-cant-prod-${i}`);
+            if (btn.value <= 0) {
+                appendAlert('No es posible completar su compra, revise su carrito.', 'danger')
+                return false;
+            }
+        }
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//estilos d las alertas 
+const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+const appendAlert = (message, type) => {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+        `   <div>${message}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+    ].join('')
+
+    alertPlaceholder.append(wrapper)
+}
+
 //validacion final con la confirmacion de compra 
-        function validarCompra() { 
-         validarTipoEnvio()
-         validarDatosEnvio()
-         validarCantidad()
-         validarDatosEnvio()
-         validarTipoCompra()
-         if (validarTipoEnvio() && validarDatosEnvio () && validarTipoCompra() && validarCantidad()) {
-            appendAlert('¡Has comprado con éxito!', 'success')
-        } else{ appendAlert('Compra invalida, rellene todos los campos. ', 'danger')
-    }}
-    
+function validarCompra() {
+    validarTipoEnvio()
+    validarDatosEnvio()
+    validarCantidad()
+    validarDatosEnvio()
+    validarTipoCompra()
+    if (validarTipoEnvio() && validarDatosEnvio() && validarTipoCompra() && validarCantidad()) {
+        appendAlert('¡Has comprado con éxito!', 'success')
+    } else {
+        appendAlert('Compra invalida, rellene todos los campos. ', 'danger')
+    }
+}
