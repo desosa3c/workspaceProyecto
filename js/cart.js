@@ -66,7 +66,7 @@ function showCart() {
         for (let i = 0; i < largo; i++) {
             arrayindice.push(i);
             arraysubtotal.push(cart[i].unitCost);
-            arraytotal.push(0);
+            arraytotal.push(cart[i].unitCost);
             const cartItem = createCartItem(cart[i], i);
             cartBodyContainer.appendChild(cartItem); //agrega la fila al contenedor.
         };

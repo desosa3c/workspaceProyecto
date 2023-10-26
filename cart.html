@@ -70,6 +70,7 @@
         </table>
 
         <div class="envio">
+          <h2 class="tituloCostos p-3">Envio</h2>
           <form class="needs-validation" id="validacionDatos">
               <table class="table table-hover">
                   <thead>
@@ -178,12 +179,24 @@
         </div>
         <br>
         <hr>
-        <h2>Forma de pago</h2>
-
-        <!-- Modal de forma de pago -->
-        <button type="button" id="modalPagoLabel" class="btn btn-primary" data-toggle="modal" data-target="#modalPago">
-          Seleccionar Forma de Pago
-        </button>
+        <div class="formaDePago buy">
+          <div class="formaDePago">
+            <div class="title p-3">
+              <h2>Forma de pago</h2>
+            </div>
+          </div>
+          <div class="buy w-100 d-flex justify-content-between">
+            <div class="btnFormaDepago">
+              <button type="button" id="modalPagoLabel" class="btn btn-primary" data-toggle="modal"
+                data-target="#modalPago">
+                Seleccionar Forma de Pago
+              </button>
+            </div>
+            <div class="btnBuy d-flex justify-content-end">
+              <button class="btn btn-outline-primary" id="comprarBtn" onclick="validarCompra()">COMPRAR</button>
+            </div>
+          </div>
+        </div>
 
         <div class="modal fade" id="modalPago" tabindex="-1" role="dialog" aria-labelledby="modalPagoLabel"
           aria-hidden="true">
@@ -259,9 +272,6 @@
   </main>
   <br>
 <div id="liveAlertPlaceholder"></div>
-  <div class="btnBuy d-flex justify-content-end w-100 ">
-    <button class="btn btn-outline-primary" id="comprarBtn" onclick="validarCompra()">COMPRAR</button>
-  </div>
   </div>
   </main>
   <footer class="text-muted">
