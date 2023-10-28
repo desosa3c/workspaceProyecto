@@ -425,9 +425,14 @@ function validarCompra() {
     validarCantidad()
     validarDatosEnvio()
     validarTipoCompra()
+
+    const carritoVacio = document.getElementById('bodyCart').childElementCount === 0;
+    
     if (validarTipoEnvio() && validarDatosEnvio() && validarTipoCompra() && validarCantidad()) {
         appendAlert('¡Has comprado con éxito!', 'success')
     } else {
         appendAlert('Compra invalida, rellene todos los campos. ', 'danger')
+    } if (carritoVacio) {
+        appendAlert('El carrito de compras está vacío. Agrega al menos un artículo antes de confirmar la compra.', 'danger');
     }
 }
