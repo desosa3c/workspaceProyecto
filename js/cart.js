@@ -398,16 +398,24 @@ function validarCantidad() {
 
 //estilos d las alertas 
 const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-const appendAlert = (message, type) => {
-    const wrapper = document.createElement('div')
-    wrapper.innerHTML = [
-        `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-        `   <div>${message}</div>`,
-        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-        '</div>'
-    ].join('')
+function appendAlert(message, type) {
+    const wrapper = document.createElement('div');
+    const alertElement = document.createElement('div');
+    alertElement.className = `alert alert-${type} alert-dismissible`;
+    alertElement.role = 'alert';
 
-    alertPlaceholder.append(wrapper)
+    alertElement.innerHTML = [
+        `<div>${message}</div>`,
+        '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    ].join('');
+
+    wrapper.appendChild(alertElement);
+    alertPlaceholder.appendChild(wrapper);
+
+    // Configurar un temporizador para eliminar automáticamente la alerta
+    setTimeout(() => {
+        alertPlaceholder.removeChild(wrapper);
+    }, 3000);
 }
 
 //validacion final con la confirmacion de compra 
