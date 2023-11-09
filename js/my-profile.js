@@ -60,7 +60,21 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("email").value = formData.email;
     document.getElementById("telefono").value = formData.telefono;
   }
+  const img_defaut = "https://i.pinimg.com/736x/e5/91/dc/e591dc82326cc4c86578e3eeecced792.jpg";
+  let file = document.getElementById("foto");
+  let img = document.getElementById("img");
 
+  file.addEventListener("change", e=>{
+    if(e.target.files[0]){
+      const reader = new FileReader();
+      reader.onload = function(e){
+        img.src = e.target.result;
+      }
+      reader.readAsDataURL(e.target.files[0]);
+    }else{
+      img.src = img_defaut;
+    }
+  })
   // Guarda los datos en el almacenamiento local cuando se envía el formulario
   const form = document.getElementById("perfil-usuario");
   form.addEventListener("submit", function(e) {

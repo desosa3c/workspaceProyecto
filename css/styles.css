@@ -5,6 +5,23 @@ git push -u origin main.jumbotron,
   font-family: 'Verdana', serif !important;
 }
 
+#foto{
+  display: none;
+}
+
+#img{
+  width: 25%;
+}
+
+
+#btn_foto{
+  background-color: #0087F7;
+  color: white;
+  padding: 6px 20px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
 .jumbotron .display-4 {
   font-weight: bold;
 }
