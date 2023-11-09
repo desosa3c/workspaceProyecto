@@ -60,15 +60,23 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("email").value = formData.email;
     document.getElementById("telefono").value = formData.telefono;
   }
-  const img_defaut = "https://i.pinimg.com/736x/e5/91/dc/e591dc82326cc4c86578e3eeecced792.jpg";
+  
+  let img_defaut = "https://i.pinimg.com/736x/e5/91/dc/e591dc82326cc4c86578e3eeecced792.jpg";
   let file = document.getElementById("foto");
   let img = document.getElementById("img");
 
+  if(localStorage.getItem("foto")){
+    img_defaut = localStorage.getItem("foto");
+    img.src = img_defaut;
+  }else{
+    img.src = img_defaut;
+  }
   file.addEventListener("change", e=>{
     if(e.target.files[0]){
       const reader = new FileReader();
       reader.onload = function(e){
         img.src = e.target.result;
+        localStorage.setItem("foto",e.target.result);
       }
       reader.readAsDataURL(e.target.files[0]);
     }else{
