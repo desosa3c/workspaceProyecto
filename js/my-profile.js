@@ -60,8 +60,8 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("email").value = formData.email;
     document.getElementById("telefono").value = formData.telefono;
   }
-  
-  const nombre = document.getElementById("nombre").value;
+
+    const nombre = document.getElementById("nombre").value;
     const apellido = document.getElementById("apellido").value;
     const email = document.getElementById("email").value;
     
